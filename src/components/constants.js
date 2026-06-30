@@ -26,6 +26,7 @@ export const IMPORTANT_LINKS = [
   { name: "Exam Routine Portal", url: "https://examcon.uiu.ac.bd/", desc: "Access official examination routines, mid & final schedules, and announcements.", category: "Updates" },
   { name: "UIU Library", url: "https://library.uiu.ac.bd/", desc: "Access online catalogues, digital books, theses, and research papers.", category: "Academic" },
   { name: "UIU Student Portal", url: "https://www.uiu.ac.bd/", desc: "Official university homepage featuring current news, announcements, and events.", category: "Administrative" },
+  { name: "UIU UCAM Cloud", url: "https://uiu.ucamcloud.com/", desc: "Cloud-based UCAM portal for course management, materials, and online learning.", category: "Academic" },
 ];
 
 export const CREDIT_FEE_PRESETS = [5000, 5525, 6500];
