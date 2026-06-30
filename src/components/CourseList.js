@@ -34,7 +34,7 @@ export default function CourseList({ courses, onUpdateCourse, onAddCourse, onDel
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.15 }}
-                className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center p-3 rounded-xl bg-background-secondary border border-border/50 hover:border-orange-500/20 hover:border-orange-500/20 transition-all shadow-sm"
+                className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center p-3 rounded-xl bg-background-secondary border border-border/50 hover:border-orange-500/20 transition-all shadow-sm"
               >
                 <div className="sm:col-span-4 flex flex-col gap-1">
                   <label className="text-[11px] text-muted font-semibold tracking-wider uppercase ml-1">
@@ -44,7 +44,7 @@ export default function CourseList({ courses, onUpdateCourse, onAddCourse, onDel
                     type="text"
                     value={course.name}
                     onChange={(e) => onUpdateCourse(course.id, "name", e.target.value)}
-                    className="w-full px-3 py-2 bg-field border border-border hover:border-zinc-300 hover:border-zinc-300 focus:border-orange-500 rounded-lg text-sm text-foreground focus:outline-none transition-all"
+                    className="w-full px-3 py-2 bg-field border border-border hover:border-zinc-300 focus:border-orange-500 rounded-lg text-sm text-foreground focus:outline-none transition-all"
                     placeholder="e.g. SPL"
                   />
                 </div>
@@ -56,7 +56,7 @@ export default function CourseList({ courses, onUpdateCourse, onAddCourse, onDel
                   <select
                     value={course.credits}
                     onChange={(e) => onUpdateCourse(course.id, "credits", e.target.value)}
-                    className="w-full px-3 py-2 bg-field border border-border hover:border-zinc-300 hover:border-zinc-300 focus:border-orange-500 rounded-lg text-sm text-foreground focus:outline-none transition-all cursor-pointer"
+                    className="w-full px-3 py-2 bg-field border border-border hover:border-zinc-300 focus:border-orange-500 rounded-lg text-sm text-foreground focus:outline-none transition-all cursor-pointer"
                   >
                     {CREDIT_OPTIONS.map((opt) => (
                       <option key={opt.value} value={opt.value} className="bg-field text-foreground">
@@ -73,7 +73,7 @@ export default function CourseList({ courses, onUpdateCourse, onAddCourse, onDel
                   <select
                     value={course.grade}
                     onChange={(e) => onUpdateCourse(course.id, "grade", e.target.value)}
-                    className="w-full px-3 py-2 bg-field border border-border hover:border-zinc-300 hover:border-zinc-300 focus:border-orange-500 rounded-lg text-sm text-foreground focus:outline-none transition-all cursor-pointer"
+                    className="w-full px-3 py-2 bg-field border border-border hover:border-zinc-300 focus:border-orange-500 rounded-lg text-sm text-foreground focus:outline-none transition-all cursor-pointer"
                   >
                     {GRADE_SCALE.map((scale) => (
                       <option key={scale.grade} value={scale.grade} className="bg-field text-foreground">
@@ -99,26 +99,26 @@ export default function CourseList({ courses, onUpdateCourse, onAddCourse, onDel
         </div>
 
         <div className="mt-2 flex flex-col sm:flex-row gap-3">
-                  <Button
-                    variant="dashed"
-                    className="flex-1 border-2 border-dashed border-border hover:border-orange-500/50 hover:bg-orange-500/5 text-muted hover:text-orange-500 py-6 transition-all duration-205"
-                    startContent={<PlusCircle className="h-5 w-5" />}
-                    onClick={onAddCourse}
-                  >
-                    Add Another Course
-                  </Button>
-                </div>
+          <Button
+            variant="dashed"
+            className="flex-1 border-2 border-dashed border-border hover:border-orange-500/50 hover:bg-orange-500/5 text-muted hover:text-orange-500 py-6 transition-all"
+            startContent={<PlusCircle className="h-5 w-5" />}
+            onClick={onAddCourse}
+          >
+            Add Another Course
+          </Button>
+        </div>
 
-                <Button
-                  size="lg"
-                  className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-black font-extrabold text-base shadow-lg shadow-orange-500/15 py-6 hover:scale-[1.01] active:scale-[0.99] transition-transform duration-105 border border-orange-400/25"
-                  startContent={<Calculator className="h-5 w-5 text-black stroke-[2.5]" />}
-                  onClick={onCalculate}
-                >
-                  Calculate CGPA
-                </Button>
+        <Button
+          size="lg"
+          className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-black font-extrabold text-base shadow-lg shadow-orange-500/15 py-6 hover:scale-[1.01] active:scale-[0.99] transition-transform border border-orange-400/25"
+          startContent={<Calculator className="h-5 w-5 text-black stroke-[2.5]" />}
+          onClick={onCalculate}
+        >
+          Calculate CGPA
+        </Button>
 
-              </Card.Content>
-            </Card>
+      </Card.Content>
+    </Card>
   );
 }

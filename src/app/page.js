@@ -18,10 +18,11 @@ export default function Home() {
 
   useEffect(() => {
     const root = window.document.documentElement;
-    root.classList.add("dark");
     if (theme === "dark") {
       root.classList.remove("light");
+      root.classList.add("dark");
     } else {
+      root.classList.remove("dark");
       root.classList.add("light");
     }
   }, [theme]);

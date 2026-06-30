@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Card, Separator } from "@heroui/react";
-import { BookOpen, Calculator, HelpCircle } from "lucide-react";
+import { BookOpen, Calculator, DollarSign, Link2, HelpCircle } from "lucide-react";
 
 export default function GuideView() {
   return (
@@ -24,19 +24,32 @@ export default function GuideView() {
         <Separator className="my-2 bg-separator" />
         <Card.Content className="px-6 py-6 flex flex-col gap-4 text-foreground leading-relaxed text-sm">
           <p>
-            The <strong>UIU CGPA &amp; Tuition Planner</strong> is a premium academic planner built explicitly for
-            students at <strong>United International University (UIU)</strong>. It helps students track their current
-            semester Grade Point Average (GPA), Cumulative Grade Point Average (CGPA), and dynamic tuition costs
-            instantaneously according to UIU&apos;s official rules.
-          </p>
-          <p>
-            The application is fully optimized for speed and works on any viewport (mobile or desktop). With built-in
-            features like the Target CGPA Planner, UIU students can calculate their future grade requirements to meet
-            scholarship requirements or graduation targets.
+            The <strong>UIU CGPA &amp; Tuition Planner</strong> is a comprehensive academic planning tool built
+            for students at <strong>United International University (UIU)</strong>. It combines four essential
+            tools into a single dashboard:
           </p>
 
+          <ul className="flex flex-col gap-3 pl-2">
+            <li className="flex items-start gap-2.5">
+              <Calculator className="h-4 w-4 text-orange-500 shrink-0 mt-0.5" />
+              <span><strong>CGPA Calculator</strong> &mdash; Calculate semester GPA and cumulative CGPA using UIU&apos;s official grade scale.</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <DollarSign className="h-4 w-4 text-orange-500 shrink-0 mt-0.5" />
+              <span><strong>Tuition Fee Calculator</strong> &mdash; Estimate tuition costs with waiver discounts and view installment schedules.</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <Link2 className="h-4 w-4 text-orange-500 shrink-0 mt-0.5" />
+              <span><strong>Links for Students</strong> &mdash; Quick access to essential university portals like ELMS, UCAM, and library.</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <HelpCircle className="h-4 w-4 text-orange-500 shrink-0 mt-0.5" />
+              <span><strong>User Guide &amp; About</strong> &mdash; Documentation and reference for all features.</span>
+            </li>
+          </ul>
+
           <h3 className="text-lg font-bold text-foreground mt-4 flex items-center gap-2">
-            <Calculator className="h-5 w-5 text-orange-500" /> Calculation Formula
+            <Calculator className="h-5 w-5 text-orange-500" /> GPA Calculation Formula
           </h3>
           <p>
             Your GPA is calculated by taking the sum of the product of course credits and their corresponding grade
@@ -48,6 +61,19 @@ export default function GuideView() {
           <p>
             Cumulative CGPA is computed by taking the total cumulative grade points accumulated over all semesters,
             divided by the overall credits completed.
+          </p>
+
+          <h3 className="text-lg font-bold text-foreground mt-4 flex items-center gap-2">
+            <DollarSign className="h-5 w-5 text-orange-500" /> Tuition Calculation Overview
+          </h3>
+          <p>
+            The tuition fee is computed as: <strong>Total Tuition = (Per-Credit Fee &times; Total Credits) + Registration Fee</strong>.
+            Waivers and discounts (merit-based scholarships, first-retake 50% discount) are subtracted, and optional
+            fees (transportation, gym, late fee) are added to produce the final payable amount.
+          </p>
+          <p>
+            Fees are split into three installments: <strong>40% + 30% + 30%</strong>, following UIU&apos;s standard
+            payment schedule.
           </p>
         </Card.Content>
       </Card>
@@ -63,18 +89,28 @@ export default function GuideView() {
         <Card.Content className="px-6 py-6 flex flex-col gap-6 text-foreground text-sm">
           <GuideStep
             number={1}
-            title="Enter Current Semester Courses"
-            description="Input your course name/code, select the credit value (usually 3.0 credits for theory, 1.0 or 1.5 credits for sessional/lab courses), and choose the letter grade you expect or have secured."
+            title="Calculate Your Semester GPA &amp; CGPA"
+            description="Go to the CGPA Calculator tab. Add your current semester courses by entering course names, selecting credit hours (3.0 for theory, 1.0/1.5 for lab/sessional), and choosing your expected or earned grade. Optionally, enter your previous CGPA and earned credits to calculate your updated cumulative CGPA. Click 'Calculate CGPA' to see results and use the Target CGPA Planner to plan future semesters."
           />
           <GuideStep
             number={2}
-            title="Estimate Tuition Fees & Waivers"
-            description="Head over to the Tuition Fee Calculator tab, choose your degree path, and type in your SSC/HSC scores. The dashboard will automatically apply valid scholarships and show your trimester/graduation costs."
+            title="Estimate Tuition Fees &amp; Waivers"
+            description="Switch to the Tuition Fee Calculator tab. Select your per-credit fee, registration fee, and waiver percentage from presets or enter custom values. Input your enrolled credits (regular, first-retake at 50% discount, and retake). The Waiver Assistant can automatically suggest your merit-based waiver when you enter your SSC and HSC GPAs. Optional fees like transportation (Tk 4,000/trimester or Tk 6,000/semester), gym, and late fee can be toggled. The Fee Summary panel shows a detailed breakdown with installment schedule."
           />
           <GuideStep
             number={3}
-            title="Use the Target Planner"
-            description="Input your target CGPA and the credits you have remaining in your degree. The calculator will estimate the average GPA required in the upcoming semesters to hit your target."
+            title="Access Student Portals &amp; Resources"
+            description="The Links for Students tab provides quick one-click access to essential UIU portals: ELMS for course materials, UCAM for academic records, the Exam Routine Portal, library resources, and the main university website. Each link opens in a new tab for convenience."
+          />
+          <GuideStep
+            number={4}
+            title="Use the Target CGPA Planner"
+            description="After calculating your current GPA, set a target CGPA and the number of remaining credits in your degree. The planner will compute the average GPA you need in upcoming semesters to reach your goal — helping you stay on track for graduation requirements or scholarship retention."
+          />
+          <GuideStep
+            number={5}
+            title="Explore the Grade Scale &amp; Theme Toggle"
+            description="Click the 'Scale' button in the top navigation to view UIU's official A-F grading system with GPA values, mark ranges, and remarks. Use the sun/moon theme toggle to switch between dark and light modes for comfortable viewing."
           />
         </Card.Content>
       </Card>
@@ -90,7 +126,7 @@ function GuideStep({ number, title, description }) {
       </div>
       <div>
         <h4 className="font-bold text-foreground text-base">{title}</h4>
-        <p className="mt-1 text-xs sm:text-sm text-muted font-medium">{description}</p>
+        <p className="mt-1 text-xs sm:text-sm text-muted font-medium leading-relaxed">{description}</p>
       </div>
     </div>
   );

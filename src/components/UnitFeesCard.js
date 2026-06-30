@@ -15,17 +15,17 @@ export default function UnitFeesCard({ creditFee, registrationFee, waiverPercent
   const [isCustomWaiver, setIsCustomWaiver] = useState(!presetWaiver.includes(String(waiverPercent)));
 
   return (
-    <Card className="border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/40 backdrop-blur-xl shadow-sm">
+    <Card className="border border-border bg-surface/70 backdrop-blur-xl shadow-sm">
       <Card.Header className="px-6 pt-6 pb-2">
         <div className="flex items-center gap-2">
           <Coins className="h-5 w-5 text-orange-500" />
           <div>
-            <h2 className="text-lg font-bold text-zinc-900 dark:text-white">Unit Fees</h2>
-            <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">Set per-credit fee, registration fee, and tuition waiver percentage.</p>
+            <h2 className="text-lg font-bold text-foreground">Unit Fees</h2>
+            <p className="text-xs text-muted mt-0.5">Set per-credit fee, registration fee, and tuition waiver percentage.</p>
           </div>
         </div>
       </Card.Header>
-      <Separator className="my-2 bg-zinc-200 dark:bg-zinc-800" />
+      <Separator className="my-2 bg-separator" />
       <Card.Content className="px-6 py-4">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <DropdownField
@@ -67,7 +67,7 @@ export default function UnitFeesCard({ creditFee, registrationFee, waiverPercent
 function DropdownField({ label, value, presets, isCustom, onPresetSelect, onCustomSelect, onCustomChange, formatOption }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-xs text-zinc-600 dark:text-zinc-400 font-bold uppercase tracking-wider">{label}</label>
+      <label className="text-xs text-muted font-bold uppercase tracking-wider">{label}</label>
       {isCustom ? (
         <div className="flex gap-2">
           <input
@@ -76,12 +76,12 @@ function DropdownField({ label, value, presets, isCustom, onPresetSelect, onCust
             placeholder="Enter amount"
             value={value}
             onChange={(e) => onCustomChange(e.target.value)}
-            className="flex-1 px-3 py-2 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-orange-500 rounded-lg text-sm text-zinc-900 dark:text-white focus:outline-none transition-all"
+            className="flex-1 px-3 py-2 bg-field border border-border hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-orange-500 rounded-lg text-sm text-foreground focus:outline-none transition-all"
           />
           <button
             type="button"
             onClick={() => onPresetSelect(presets[0])}
-            className="px-3 py-2 text-xs font-bold whitespace-nowrap rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-800"
+            className="px-3 py-2 text-xs font-bold whitespace-nowrap rounded-lg bg-surface-secondary text-muted hover:text-foreground hover:bg-background-secondary border border-border"
           >
             Presets
           </button>
@@ -96,7 +96,7 @@ function DropdownField({ label, value, presets, isCustom, onPresetSelect, onCust
             onPresetSelect(e.target.value);
           }
         }}
-        className={`w-full px-3 py-2 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-orange-500 rounded-lg text-sm text-zinc-900 dark:text-white focus:outline-none transition-all cursor-pointer ${isCustom ? "mt-2" : ""}`}
+        className={`w-full px-3 py-2 bg-field border border-border hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-orange-500 rounded-lg text-sm text-foreground focus:outline-none transition-all cursor-pointer ${isCustom ? "mt-2" : ""}`}
       >
         {presets.map((p) => (
           <option key={p} value={p}>

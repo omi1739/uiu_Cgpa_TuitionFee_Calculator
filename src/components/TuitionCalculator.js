@@ -49,7 +49,7 @@ export default function TuitionCalculator() {
   const netTuition = Math.max(0, totalTuition - totalWaiver);
 
   const lateAmt = lateFee ? 500 : 0;
-  const transportAmt = transportFee ? (trimesterMode ? 1500 : 2000) : 0;
+  const transportAmt = transportFee ? (trimesterMode ? 4000 : 6000) : 0;
   const gymAmt = gymFee ? (trimesterMode ? 1500 : 2200) : 0;
   const totalAddedFees = lateAmt + transportAmt + gymAmt;
 

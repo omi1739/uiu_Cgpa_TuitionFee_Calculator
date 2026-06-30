@@ -51,7 +51,7 @@ export default function Navbar({ activeTab, onTabChange, theme, onThemeToggle, o
             variant="flat"
             aria-label="Toggle Theme"
             className="bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-800"
-            onClick={onThemeToggle}
+            onPress={onThemeToggle}
           >
             {theme === "dark" ? (
               <Sun className="h-5 w-5 text-amber-400 animate-pulse" />

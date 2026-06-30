@@ -20,7 +20,7 @@ export default function ExtrasCard({ fydp, lateFee, transportFee, gymFee, trimes
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <CheckboxItem id="fydp" label="FYDP (Capstone)" desc="2 credits excluded from waiver" checked={fydp} onChange={onFydpChange} />
           <CheckboxItem id="late" label="Late Fee" desc="Tk 500 penalty" checked={lateFee} onChange={onLateFeeChange} />
-          <CheckboxItem id="transport" label="Transportation (Bus)" desc={`Tk ${trimesterMode ? 1500 : 2000}/${trimesterMode ? "tri" : "sem"}ester`} checked={transportFee} onChange={onTransportChange} />
+          <CheckboxItem id="transport" label="Transportation (Bus)" desc={`Tk ${trimesterMode ? 4000 : 6000}/${trimesterMode ? "tri" : "sem"}ester`} checked={transportFee} onChange={onTransportChange} />
           <CheckboxItem id="gym" label="Gym" desc={`Tk ${trimesterMode ? 1500 : 2200}/${trimesterMode ? "tri" : "sem"}ester`} checked={gymFee} onChange={onGymChange} />
         </div>
 
