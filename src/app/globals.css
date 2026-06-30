@@ -1,8 +1,18 @@
 @import "tailwindcss";
+@import "@heroui/styles";
+
+@source "../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}";
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc; /* Slate-50 background in light mode */
+  --foreground: #09090b; /* Zinc-950 foreground in light mode */
+}
+
+.dark {
+  --background: #09090b; /* Zinc-950 background in dark mode */
+  --foreground: #f4f4f5; /* Zinc-100 foreground in dark mode */
 }
 
 @theme inline {
@@ -12,15 +22,8 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
