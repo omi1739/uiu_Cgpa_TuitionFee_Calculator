@@ -10,8 +10,8 @@ import TargetPlanner from "./TargetPlanner";
 
 export default function CGPACalculator() {
   const [courses, setCourses] = useState([
-    { id: 1, name: "Course 1", credits: "3.0", grade: "A" },
-    { id: 2, name: "Course 2", credits: "3.0", grade: "B+" },
+    { id: 1, name: "", credits: "3.0", grade: "A" },
+    { id: 2, name: "", credits: "3.0", grade: "B+" },
   ]);
 
   const [prevCGPA, setPrevCGPA] = useState("");
@@ -32,7 +32,7 @@ export default function CGPACalculator() {
 
   const addCourse = () => {
     const nextId = courses.length > 0 ? Math.max(...courses.map((c) => c.id)) + 1 : 1;
-    setCourses((prev) => [...prev, { id: nextId, name: `Course ${nextId}`, credits: "3.0", grade: "A" }]);
+    setCourses((prev) => [...prev, { id: nextId, name: "", credits: "3.0", grade: "A" }]);
     setIsCalculated(false);
   };
 
@@ -44,7 +44,7 @@ export default function CGPACalculator() {
   };
 
   const clearAll = () => {
-    setCourses([{ id: 1, name: "Course 1", credits: "3.0", grade: "A" }]);
+    setCourses([{ id: 1, name: "", credits: "3.0", grade: "A" }]);
     setPrevCGPA("");
     setPrevCredits("");
     setSemesterGPA(null);

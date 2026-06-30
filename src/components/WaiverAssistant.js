@@ -20,7 +20,7 @@ export default function WaiverAssistant({ sscGpa, hscGpa, suggestedWaiver, onSsc
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="flex flex-col gap-1.5">
             <label htmlFor="ssc-gpa" className="text-xs text-muted font-medium">SSC GPA (With 4th subject)</label>
-            <input
+            <input autoComplete="off"
               id="ssc-gpa"
               type="number"
               step="0.01"
@@ -34,7 +34,7 @@ export default function WaiverAssistant({ sscGpa, hscGpa, suggestedWaiver, onSsc
           </div>
           <div className="flex flex-col gap-1.5">
             <label htmlFor="hsc-gpa" className="text-xs text-muted font-medium">HSC GPA (Without 4th subject)</label>
-            <input
+            <input autoComplete="off"
               id="hsc-gpa"
               type="number"
               step="0.01"

@@ -17,7 +17,7 @@ export default function TargetPlanner({ targetCGPA, remainingCredits, targetAdvi
         <div className="grid grid-cols-2 gap-3">
           <div className="flex flex-col gap-1">
             <label htmlFor="target-cgpa" className="text-xs text-muted font-medium">Target CGPA</label>
-            <input
+            <input autoComplete="off"
               id="target-cgpa"
               type="number"
               step="0.01"
@@ -30,7 +30,7 @@ export default function TargetPlanner({ targetCGPA, remainingCredits, targetAdvi
           </div>
           <div className="flex flex-col gap-1">
             <label htmlFor="remaining-credits" className="text-xs text-muted font-medium">Remaining Credits</label>
-            <input
+            <input autoComplete="off"
               id="remaining-credits"
               type="number"
               step="1"

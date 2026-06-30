@@ -16,6 +16,7 @@ export default function Home() {
   const [theme, setTheme] = useState("dark");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+
   useEffect(() => {
     const root = window.document.documentElement;
     if (theme === "dark") {
@@ -26,6 +27,16 @@ export default function Home() {
       root.classList.add("light");
     }
   }, [theme]);
+
+  useEffect(() => {
+    document.querySelectorAll("input, select").forEach((el) => el.setAttribute("autocomplete", "off"));
+  });
+
+  useEffect(() => {
+    const handleBeforeUnload = () => { };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, []);
 
   const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
 

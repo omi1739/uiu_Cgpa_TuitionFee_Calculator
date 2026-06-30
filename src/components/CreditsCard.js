@@ -20,7 +20,7 @@ export default function CreditsCard({ regularCredits, firstRetakeCredits, retake
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="flex flex-col gap-1.5">
             <label htmlFor="regular-credits" className="text-xs text-muted font-bold uppercase tracking-wider">Regular Credits</label>
-            <input
+            <input autoComplete="off"
               id="regular-credits"
               type="number"
               min="0"
@@ -32,7 +32,7 @@ export default function CreditsCard({ regularCredits, firstRetakeCredits, retake
           </div>
           <div className="flex flex-col gap-1.5">
             <label htmlFor="first-retake-credits" className="text-xs text-muted font-bold uppercase tracking-wider">1st Retake Credits</label>
-            <input
+            <input autoComplete="off"
               id="first-retake-credits"
               type="number"
               min="0"
@@ -45,7 +45,7 @@ export default function CreditsCard({ regularCredits, firstRetakeCredits, retake
           </div>
           <div className="flex flex-col gap-1.5">
             <label htmlFor="retake-credits" className="text-xs text-muted font-bold uppercase tracking-wider">Retake Credits</label>
-            <input
+            <input autoComplete="off"
               id="retake-credits"
               type="number"
               min="0"

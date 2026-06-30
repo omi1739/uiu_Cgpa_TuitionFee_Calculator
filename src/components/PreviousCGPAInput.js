@@ -21,7 +21,7 @@ export default function PreviousCGPAInput({ prevCGPA, prevCredits, onPrevCGPACha
       <Card.Content className="px-6 py-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="flex flex-col gap-1.5">
           <label htmlFor="prev-cgpa" className="text-xs text-muted font-medium">Previous Cumulative CGPA</label>
-          <input
+          <input autoComplete="off"
             id="prev-cgpa"
             type="number"
             step="0.01"
@@ -35,7 +35,7 @@ export default function PreviousCGPAInput({ prevCGPA, prevCredits, onPrevCGPACha
         </div>
         <div className="flex flex-col gap-1.5">
           <label htmlFor="prev-credits" className="text-xs text-muted font-medium">Previous Earned Credits</label>
-          <input
+          <input autoComplete="off"
             id="prev-credits"
             type="number"
             step="0.5"

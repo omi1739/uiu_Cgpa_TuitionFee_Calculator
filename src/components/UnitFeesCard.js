@@ -73,7 +73,7 @@ function DropdownField({ id, label, value, presets, isCustom, onPresetSelect, on
       <label htmlFor={id} className="text-xs text-muted font-bold uppercase tracking-wider">{label}</label>
       {isCustom ? (
         <div className="flex gap-2">
-          <input
+          <input autoComplete="off"
             id={id}
             type="number"
             min="0"
@@ -91,7 +91,7 @@ function DropdownField({ id, label, value, presets, isCustom, onPresetSelect, on
           </button>
         </div>
       ) : null}
-      <select
+      <select autoComplete="off"
         id={isCustom ? undefined : id}
         value={isCustom ? "custom" : value}
         onChange={(e) => {

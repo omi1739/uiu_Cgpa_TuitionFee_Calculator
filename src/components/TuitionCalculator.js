@@ -9,10 +9,10 @@ import WaiverAssistant from "./WaiverAssistant";
 import FeeSummary from "./FeeSummary";
 
 export default function TuitionCalculator() {
-  const [creditFee, setCreditFee] = useState("6500");
-  const [registrationFee, setRegistrationFee] = useState("5000");
+  const [creditFee, setCreditFee] = useState("");
+  const [registrationFee, setRegistrationFee] = useState("");
   const [waiverPercent, setWaiverPercent] = useState(0);
-  const [regularCredits, setRegularCredits] = useState("12");
+  const [regularCredits, setRegularCredits] = useState("");
   const [firstRetakeCredits, setFirstRetakeCredits] = useState("");
   const [retakeCredits, setRetakeCredits] = useState("");
   const [fydp, setFydp] = useState(false);

@@ -40,7 +40,7 @@ export default function CourseList({ courses, onUpdateCourse, onAddCourse, onDel
                   <label htmlFor={`course-name-${course.id}`} className="text-[11px] text-muted font-semibold tracking-wider uppercase ml-1">
                     Course Title
                   </label>
-                  <input
+                  <input autoComplete="off"
                     id={`course-name-${course.id}`}
                     type="text"
                     value={course.name}
@@ -54,7 +54,7 @@ export default function CourseList({ courses, onUpdateCourse, onAddCourse, onDel
                   <label htmlFor={`course-credits-${course.id}`} className="text-[11px] text-muted font-semibold tracking-wider uppercase ml-1">
                     Credits
                   </label>
-                  <select
+                  <select autoComplete="off"
                     id={`course-credits-${course.id}`}
                     value={course.credits}
                     onChange={(e) => onUpdateCourse(course.id, "credits", e.target.value)}
@@ -72,7 +72,7 @@ export default function CourseList({ courses, onUpdateCourse, onAddCourse, onDel
                   <label htmlFor={`course-grade-${course.id}`} className="text-[11px] text-muted font-semibold tracking-wider uppercase ml-1">
                     Grade
                   </label>
-                  <select
+                  <select autoComplete="off"
                     id={`course-grade-${course.id}`}
                     value={course.grade}
                     onChange={(e) => onUpdateCourse(course.id, "grade", e.target.value)}
