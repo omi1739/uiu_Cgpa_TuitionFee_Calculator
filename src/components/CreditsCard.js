@@ -19,8 +19,9 @@ export default function CreditsCard({ regularCredits, firstRetakeCredits, retake
       <Card.Content className="px-6 py-4 flex flex-col gap-5">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs text-muted font-bold uppercase tracking-wider">Regular Credits</label>
+            <label htmlFor="regular-credits" className="text-xs text-muted font-bold uppercase tracking-wider">Regular Credits</label>
             <input
+              id="regular-credits"
               type="number"
               min="0"
               placeholder="e.g. 14"
@@ -30,8 +31,9 @@ export default function CreditsCard({ regularCredits, firstRetakeCredits, retake
             />
           </div>
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs text-muted font-bold uppercase tracking-wider">1st Retake Credits</label>
+            <label htmlFor="first-retake-credits" className="text-xs text-muted font-bold uppercase tracking-wider">1st Retake Credits</label>
             <input
+              id="first-retake-credits"
               type="number"
               min="0"
               placeholder="e.g. 3"
@@ -42,8 +44,9 @@ export default function CreditsCard({ regularCredits, firstRetakeCredits, retake
             <span className="text-[10px] text-muted ml-1">50% waiver discount applies</span>
           </div>
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs text-muted font-bold uppercase tracking-wider">Retake Credits</label>
+            <label htmlFor="retake-credits" className="text-xs text-muted font-bold uppercase tracking-wider">Retake Credits</label>
             <input
+              id="retake-credits"
               type="number"
               min="0"
               placeholder="e.g. 3"

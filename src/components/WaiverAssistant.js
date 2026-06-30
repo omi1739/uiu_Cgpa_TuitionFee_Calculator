@@ -11,7 +11,7 @@ export default function WaiverAssistant({ sscGpa, hscGpa, suggestedWaiver, onSsc
           <BadgePercent className="h-5 w-5 text-orange-500" />
           <div>
             <h3 className="text-base font-bold text-foreground">Admission Waiver Assistant</h3>
-            <p className="text-xs text-muted">Input your SSC & HSC GPAs to see if you qualify for official admission scholarships.</p>
+            <p className="text-xs text-muted">Input your SSC & HSC GPAs to see if you qualify for official UIU admission scholarships.</p>
           </div>
         </div>
       </Card.Header>
@@ -19,8 +19,9 @@ export default function WaiverAssistant({ sscGpa, hscGpa, suggestedWaiver, onSsc
       <Card.Content className="px-6 py-4 flex flex-col gap-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs text-muted font-medium">SSC GPA (With 4th subject)</label>
+            <label htmlFor="ssc-gpa" className="text-xs text-muted font-medium">SSC GPA (With 4th subject)</label>
             <input
+              id="ssc-gpa"
               type="number"
               step="0.01"
               min="0"
@@ -32,8 +33,9 @@ export default function WaiverAssistant({ sscGpa, hscGpa, suggestedWaiver, onSsc
             />
           </div>
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs text-muted font-medium">HSC GPA (Without 4th subject)</label>
+            <label htmlFor="hsc-gpa" className="text-xs text-muted font-medium">HSC GPA (Without 4th subject)</label>
             <input
+              id="hsc-gpa"
               type="number"
               step="0.01"
               min="0"
@@ -51,7 +53,7 @@ export default function WaiverAssistant({ sscGpa, hscGpa, suggestedWaiver, onSsc
             suggestedWaiver > 0
               ? "bg-green-500/5 border-green-500/20 text-green-700"
               : "bg-amber-500/5 border-amber-500/20 text-amber-700"
-          }`}>
+          }`} role="status" aria-live="polite">
             {suggestedWaiver > 0 ? (
               <>
                 <CheckCircle className="h-5 w-5 shrink-0 mt-0.5" />

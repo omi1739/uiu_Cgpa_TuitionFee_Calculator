@@ -37,10 +37,11 @@ export default function CourseList({ courses, onUpdateCourse, onAddCourse, onDel
                 className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center p-3 rounded-xl bg-background-secondary border border-border/50 hover:border-orange-500/20 transition-all shadow-sm"
               >
                 <div className="sm:col-span-4 flex flex-col gap-1">
-                  <label className="text-[11px] text-muted font-semibold tracking-wider uppercase ml-1">
+                  <label htmlFor={`course-name-${course.id}`} className="text-[11px] text-muted font-semibold tracking-wider uppercase ml-1">
                     Course Title
                   </label>
                   <input
+                    id={`course-name-${course.id}`}
                     type="text"
                     value={course.name}
                     onChange={(e) => onUpdateCourse(course.id, "name", e.target.value)}
@@ -50,10 +51,11 @@ export default function CourseList({ courses, onUpdateCourse, onAddCourse, onDel
                 </div>
 
                 <div className="sm:col-span-4 flex flex-col gap-1">
-                  <label className="text-[11px] text-muted font-semibold tracking-wider uppercase ml-1">
+                  <label htmlFor={`course-credits-${course.id}`} className="text-[11px] text-muted font-semibold tracking-wider uppercase ml-1">
                     Credits
                   </label>
                   <select
+                    id={`course-credits-${course.id}`}
                     value={course.credits}
                     onChange={(e) => onUpdateCourse(course.id, "credits", e.target.value)}
                     className="w-full px-3 py-2 bg-field border border-border hover:border-zinc-300 focus:border-orange-500 rounded-lg text-sm text-foreground focus:outline-none transition-all cursor-pointer"
@@ -67,10 +69,11 @@ export default function CourseList({ courses, onUpdateCourse, onAddCourse, onDel
                 </div>
 
                 <div className="sm:col-span-3 flex flex-col gap-1">
-                  <label className="text-[11px] text-muted font-semibold tracking-wider uppercase ml-1">
+                  <label htmlFor={`course-grade-${course.id}`} className="text-[11px] text-muted font-semibold tracking-wider uppercase ml-1">
                     Grade
                   </label>
                   <select
+                    id={`course-grade-${course.id}`}
                     value={course.grade}
                     onChange={(e) => onUpdateCourse(course.id, "grade", e.target.value)}
                     className="w-full px-3 py-2 bg-field border border-border hover:border-zinc-300 focus:border-orange-500 rounded-lg text-sm text-foreground focus:outline-none transition-all cursor-pointer"
@@ -89,6 +92,7 @@ export default function CourseList({ courses, onUpdateCourse, onAddCourse, onDel
                     disabled={courses.length <= 1}
                     onClick={() => onDeleteCourse(course.id)}
                     className="p-2 text-muted hover:text-red-500 hover:bg-surface-secondary rounded-lg disabled:opacity-30 transition-colors"
+                    aria-label={`Remove ${course.name}`}
                   >
                     <Trash2 className="h-5 w-5" />
                   </button>

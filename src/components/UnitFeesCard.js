@@ -29,6 +29,7 @@ export default function UnitFeesCard({ creditFee, registrationFee, waiverPercent
       <Card.Content className="px-6 py-4">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <DropdownField
+            id="credit-fee"
             label="Credit Fee (Tk)"
             value={creditFee}
             presets={presetCredit}
@@ -39,6 +40,7 @@ export default function UnitFeesCard({ creditFee, registrationFee, waiverPercent
             formatOption={(v) => `Tk ${Number(v).toLocaleString()}`}
           />
           <DropdownField
+            id="registration-fee"
             label="Registration Fee (Tk)"
             value={registrationFee}
             presets={presetReg}
@@ -49,6 +51,7 @@ export default function UnitFeesCard({ creditFee, registrationFee, waiverPercent
             formatOption={(v) => `Tk ${Number(v).toLocaleString()}`}
           />
           <DropdownField
+            id="tuition-waiver"
             label="Tuition Waiver %"
             value={String(waiverPercent)}
             presets={presetWaiver}
@@ -64,13 +67,14 @@ export default function UnitFeesCard({ creditFee, registrationFee, waiverPercent
   );
 }
 
-function DropdownField({ label, value, presets, isCustom, onPresetSelect, onCustomSelect, onCustomChange, formatOption }) {
+function DropdownField({ id, label, value, presets, isCustom, onPresetSelect, onCustomSelect, onCustomChange, formatOption }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-xs text-muted font-bold uppercase tracking-wider">{label}</label>
+      <label htmlFor={id} className="text-xs text-muted font-bold uppercase tracking-wider">{label}</label>
       {isCustom ? (
         <div className="flex gap-2">
           <input
+            id={id}
             type="number"
             min="0"
             placeholder="Enter amount"
@@ -88,6 +92,7 @@ function DropdownField({ label, value, presets, isCustom, onPresetSelect, onCust
         </div>
       ) : null}
       <select
+        id={isCustom ? undefined : id}
         value={isCustom ? "custom" : value}
         onChange={(e) => {
           if (e.target.value === "custom") {

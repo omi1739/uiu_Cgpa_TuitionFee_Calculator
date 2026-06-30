@@ -33,7 +33,7 @@ export default function ResultsPanel({ semesterGPA, cumulativeCGPA, totalCredits
               </div>
             </Card.Header>
             <Separator className="my-2 bg-separator" />
-            <Card.Content className="px-6 py-6 flex flex-col gap-6">
+            <Card.Content className="px-6 py-6 flex flex-col gap-6" aria-live="polite">
               <div className="flex flex-col items-center justify-center py-4 bg-background-secondary rounded-2xl border border-border/80">
                 <span className="text-muted text-xs font-semibold uppercase tracking-wider">
                   Semester GPA
@@ -86,7 +86,7 @@ export default function ResultsPanel({ semesterGPA, cumulativeCGPA, totalCredits
             <div>
               <h4 className="font-semibold text-foreground">Awaiting Calculation</h4>
               <p className="text-xs text-zinc-500 mt-1 max-w-[200px] mx-auto">
-                Fill in your grades and click the button to see your GPA details.
+                Enter your courses and grades, then click Calculate CGPA to see your semester GPA and cumulative CGPA.
               </p>
             </div>
           </Card.Content>

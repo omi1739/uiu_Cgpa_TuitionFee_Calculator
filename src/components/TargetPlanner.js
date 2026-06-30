@@ -16,8 +16,9 @@ export default function TargetPlanner({ targetCGPA, remainingCredits, targetAdvi
       <Card.Content className="px-6 py-4 flex flex-col gap-4">
         <div className="grid grid-cols-2 gap-3">
           <div className="flex flex-col gap-1">
-            <label className="text-xs text-muted font-medium">Target CGPA</label>
+            <label htmlFor="target-cgpa" className="text-xs text-muted font-medium">Target CGPA</label>
             <input
+              id="target-cgpa"
               type="number"
               step="0.01"
               min="0"
@@ -28,8 +29,9 @@ export default function TargetPlanner({ targetCGPA, remainingCredits, targetAdvi
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label className="text-xs text-muted font-medium">Remaining Credits</label>
+            <label htmlFor="remaining-credits" className="text-xs text-muted font-medium">Remaining Credits</label>
             <input
+              id="remaining-credits"
               type="number"
               step="1"
               min="1"
@@ -41,13 +43,13 @@ export default function TargetPlanner({ targetCGPA, remainingCredits, targetAdvi
         </div>
 
         {targetAdvice ? (
-          <div className="p-3.5 bg-surface-secondary rounded-xl border border-border/60 text-xs leading-relaxed text-foreground flex gap-2">
+          <div className="p-3.5 bg-surface-secondary rounded-xl border border-border/60 text-xs leading-relaxed text-foreground flex gap-2" role="status" aria-live="polite">
             <span className="text-orange-500">&bull;</span>
             <p>{targetAdvice}</p>
           </div>
         ) : (
           <p className="text-xs text-muted italic text-center py-2">
-            Enter target CGPA and remaining credits to see required grade trends.
+            Enter your target CGPA and remaining credits to calculate the GPA needed to reach your academic goals.
           </p>
         )}
       </Card.Content>

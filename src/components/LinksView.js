@@ -20,8 +20,8 @@ export default function LinksView() {
           <div className="flex items-center gap-2.5">
             <LinkIcon className="h-6 w-6 text-orange-500" />
             <div>
-              <h2 className="text-xl font-black text-foreground">Links for Students</h2>
-              <p className="text-xs text-muted mt-0.5">Quick references to critical university portals and resources.</p>
+              <h2 className="text-xl font-black text-foreground">Links for UIU Students</h2>
+              <p className="text-xs text-muted mt-0.5">Quick access to essential United International University portals and student resources.</p>
             </div>
           </div>
         </Card.Header>
@@ -34,6 +34,7 @@ export default function LinksView() {
               target="_blank"
               rel="noopener noreferrer"
               className="group flex flex-col sm:flex-row sm:items-center justify-between p-5 rounded-2xl border border-border bg-surface-secondary hover:border-orange-500/50 hover:bg-orange-500/5 transition-all duration-200"
+              aria-label={`Visit ${link.name} — opens in new tab`}
             >
               <div className="flex flex-col gap-1 max-w-xl">
                 <div className="flex items-center gap-2">

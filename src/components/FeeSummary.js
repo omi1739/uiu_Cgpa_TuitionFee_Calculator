@@ -21,7 +21,7 @@ export default function FeeSummary({ feeBreakdown }) {
         </div>
       </Card.Header>
       <Separator className="my-2 bg-separator" />
-      <Card.Content className="px-6 py-6 flex flex-col gap-6">
+      <Card.Content className="px-6 py-6 flex flex-col gap-6" aria-live="polite">
         <div className="flex flex-col items-center justify-center py-5 bg-background-secondary border border-border rounded-2xl">
           <span className="text-muted text-xs font-semibold uppercase tracking-wider">
             {trimesterMode ? "Trimester" : "Semester"} Total

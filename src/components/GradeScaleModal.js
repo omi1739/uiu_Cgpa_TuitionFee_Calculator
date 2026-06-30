@@ -9,7 +9,12 @@ export default function GradeScaleModal({ isOpen, onClose }) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="grade-scale-title"
+        >
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -26,14 +31,15 @@ export default function GradeScaleModal({ isOpen, onClose }) {
           >
             <div className="flex justify-between items-start pb-4 border-b border-zinc-200 dark:border-zinc-800">
               <div>
-                <h3 className="text-zinc-900 dark:text-white text-lg font-bold">UIU Official Grading System</h3>
+                <h2 id="grade-scale-title" className="text-zinc-900 dark:text-white text-lg font-bold">UIU Official Grading System</h2>
                 <p className="text-xs text-zinc-500 dark:text-zinc-400 font-normal">
-                  Adopted by United International University
+                  United International University &mdash; Undergraduate Grade Scale
                 </p>
               </div>
               <button
                 onClick={onClose}
                 className="p-1 text-zinc-400 hover:text-zinc-900 dark:hover:text-white rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+                aria-label="Close grading scale modal"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -41,8 +47,8 @@ export default function GradeScaleModal({ isOpen, onClose }) {
             <div className="py-4 flex flex-col gap-2">
               <div className="grid grid-cols-4 text-xs font-semibold uppercase tracking-wider text-zinc-500 pb-2 border-b border-zinc-200 dark:border-zinc-900 px-2">
                 <span>Grade</span>
-                <span>GPA Value</span>
-                <span>Marks %</span>
+                <span>GPA</span>
+                <span>Marks</span>
                 <span>Remarks</span>
               </div>
               <div className="flex flex-col max-h-[320px] overflow-y-auto pr-1 gap-1">

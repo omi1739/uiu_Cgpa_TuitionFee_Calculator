@@ -12,7 +12,7 @@ export default function PreviousCGPAInput({ prevCGPA, prevCredits, onPrevCGPACha
           <div>
             <h3 className="text-base font-bold text-foreground">Include Previous CGPA (Optional)</h3>
             <p className="text-xs text-muted">
-              Combine your current semester results with your cumulative academic history.
+              Combine your current semester results with your cumulative academic history to calculate your overall CGPA.
             </p>
           </div>
         </div>
@@ -20,8 +20,9 @@ export default function PreviousCGPAInput({ prevCGPA, prevCredits, onPrevCGPACha
       <Separator className="my-2 bg-separator" />
       <Card.Content className="px-6 py-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs text-muted font-medium">Previous Cumulative CGPA</label>
+          <label htmlFor="prev-cgpa" className="text-xs text-muted font-medium">Previous Cumulative CGPA</label>
           <input
+            id="prev-cgpa"
             type="number"
             step="0.01"
             min="0"
@@ -33,8 +34,9 @@ export default function PreviousCGPAInput({ prevCGPA, prevCredits, onPrevCGPACha
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs text-muted font-medium">Previous Earned Credits</label>
+          <label htmlFor="prev-credits" className="text-xs text-muted font-medium">Previous Earned Credits</label>
           <input
+            id="prev-credits"
             type="number"
             step="0.5"
             min="0"
