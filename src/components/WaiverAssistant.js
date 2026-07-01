@@ -51,8 +51,8 @@ export default function WaiverAssistant({ sscGpa, hscGpa, suggestedWaiver, onSsc
         {suggestedWaiver !== null && (
           <div className={`p-4 rounded-xl border flex gap-3 items-start transition-colors duration-200 ${
             suggestedWaiver > 0
-              ? "bg-green-500/5 border-green-500/20 text-green-700"
-              : "bg-amber-500/5 border-amber-500/20 text-amber-700"
+              ? "bg-green-500/5 border-green-500/20 text-green-700 dark:text-green-400"
+              : "bg-amber-500/5 border-amber-500/20 text-amber-700 dark:text-amber-400"
           }`} role="status" aria-live="polite">
             {suggestedWaiver > 0 ? (
               <>
@@ -60,7 +60,7 @@ export default function WaiverAssistant({ sscGpa, hscGpa, suggestedWaiver, onSsc
                 <div>
                   <span className="font-extrabold text-sm block">Waiver Found!</span>
                   <p className="text-xs leading-relaxed mt-0.5">
-                    Based on your results, you qualify for a **{suggestedWaiver}% Tuition Fee Waiver** under UIU&apos;s academic policy (re-applied automatically below).
+                    Based on your results, you qualify for a <strong>{suggestedWaiver}% Tuition Fee Waiver</strong> under UIU&apos;s academic policy (re-applied automatically below).
                   </p>
                 </div>
               </>
@@ -80,11 +80,11 @@ export default function WaiverAssistant({ sscGpa, hscGpa, suggestedWaiver, onSsc
 
         <div className="p-3 bg-surface-secondary border border-border rounded-xl text-xs text-muted flex flex-col gap-1.5">
           <span className="font-semibold text-foreground">UIU General Admission Waiver Rules (Spring 2025 onwards):</span>
-          <span>&bull; **50% Waiver (National Curriculum)**: SSC GPA 5.00 (with 4th) & HSC GPA 5.00 (without 4th subject)</span>
-          <span>&bull; **25% Waiver (National Curriculum)**: SSC GPA 4.50 (with 4th) & HSC GPA 5.00 (with 4th subject)</span>
+          <span><strong>50% Waiver (National Curriculum)</strong>: SSC GPA 5.00 (with 4th) &amp; HSC GPA 5.00 (without 4th subject)</span>
+          <span><strong>25% Waiver (National Curriculum)</strong>: SSC GPA 4.50 (with 4th) &amp; HSC GPA 5.00 (with 4th subject)</span>
           <span className="border-t border-border pt-1.5 font-semibold text-foreground">English Medium (O/A Level):</span>
-          <span>&bull; **50% Waiver**: 5 A&apos;s in O-Level (in one sitting) & 2 A&apos;s in A-Level</span>
-          <span>&bull; **25% Waiver**: 5 A&apos;s in O-Level (in one sitting) & 1 A in A-Level</span>
+          <span><strong>50% Waiver</strong>: 5 A&apos;s in O-Level (in one sitting) &amp; 2 A&apos;s in A-Level</span>
+          <span><strong>25% Waiver</strong>: 5 A&apos;s in O-Level (in one sitting) &amp; 1 A in A-Level</span>
         </div>
       </Card.Content>
     </Card>

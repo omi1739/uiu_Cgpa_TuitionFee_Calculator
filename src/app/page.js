@@ -45,7 +45,9 @@ export default function Home() {
     >
       <HeroBanner />
 
-      <section className="max-w-5xl mx-auto px-6 pb-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <section aria-label="Tools" className="max-w-5xl mx-auto px-6 pb-16">
+        <h2 className="sr-only">UIU Academic Planning Tools</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {FEATURES.map((feature) => (
           <Link key={feature.href} href={feature.href}>
             <div className="group relative p-5 rounded-2xl border border-border bg-surface hover:border-orange-500/30 hover:shadow-lg hover:shadow-orange-500/5 transition-all duration-200 cursor-pointer h-full flex flex-col">
@@ -60,6 +62,7 @@ export default function Home() {
             </div>
           </Link>
         ))}
+        </div>
       </section>
     </motion.main>
   );

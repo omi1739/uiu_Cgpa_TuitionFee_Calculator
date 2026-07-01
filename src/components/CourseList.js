@@ -14,7 +14,7 @@ export default function CourseList({ courses, onUpdateCourse, onAddCourse, onDel
 
   return (
     <Card className="border border-border bg-surface shadow-sm">
-      <Card.Header className="flex items-center gap-2 px-6 pt-2 ">
+      <Card.Header className="flex items-center gap-2 px-6  ">
         <div className="h-9 w-9 rounded-lg bg-orange-500/10 flex items-center justify-center">
           <Layers className="h-5 w-5 text-orange-500" />
         </div>
@@ -24,7 +24,7 @@ export default function CourseList({ courses, onUpdateCourse, onAddCourse, onDel
         </div>
       </Card.Header>
       <Separator className="my-0.5 bg-separator" />
-      <Card.Content className="px-5 pt-3 pb-4 flex flex-col gap-3">
+      <Card.Content className="px-5 pt-1 pb-2 flex flex-col gap-3">
         <AnimatePresence initial={false}>
           {courses.map((course) => (
             <motion.div

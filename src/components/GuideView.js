@@ -49,31 +49,98 @@ export default function GuideView() {
           </ul>
 
           <h3 className="text-lg font-bold text-foreground mt-4 flex items-center gap-2">
-            <Calculator className="h-5 w-5 text-orange-500" /> GPA Calculation Formula
+            <Calculator className="h-5 w-5 text-orange-500" /> UIU Grading System &amp; GPA Calculation
           </h3>
           <p>
-            Your GPA is calculated by taking the sum of the product of course credits and their corresponding grade
-            points, divided by the total credits attempted:
+            United International University (UIU) follows the standard letter-grade system with GPA values ranging
+            from <strong>4.00 (A)</strong> to <strong>0.00 (F)</strong>. Each letter grade corresponds to a specific
+            mark range and grade point used in GPA computation:
+          </p>
+          <ul className="flex flex-col gap-1.5 pl-2 text-sm">
+            <li><strong>A (4.00)</strong> &mdash; 90-100% (Outstanding)</li>
+            <li><strong>A- (3.67)</strong> &mdash; 86-89% (Excellent)</li>
+            <li><strong>B+ (3.33)</strong> &mdash; 82-85% (Very Good)</li>
+            <li><strong>B (3.00)</strong> &mdash; 78-81% (Good)</li>
+            <li><strong>B- (2.67)</strong> &mdash; 74-77% (Satisfactory)</li>
+            <li><strong>C+ (2.33)</strong> &mdash; 70-73% (Above Average)</li>
+            <li><strong>C (2.00)</strong> &mdash; 66-69% (Average)</li>
+            <li><strong>C- (1.67)</strong> &mdash; 62-65% (Below Average)</li>
+            <li><strong>D+ (1.33)</strong> &mdash; 58-61% (Poor)</li>
+            <li><strong>D (1.00)</strong> &mdash; 55-57% (Very Poor)</li>
+            <li><strong>F (0.00)</strong> &mdash; Below 55% (Failed)</li>
+          </ul>
+          <p>
+            Your <strong>semester GPA</strong> is calculated by dividing the total grade points earned by the total
+            credits attempted in that semester:
           </p>
           <div className="bg-surface-secondary p-4 rounded-xl border border-border font-mono text-center text-xs sm:text-sm text-orange-600">
             GPA = &sum; (Course Credits &times; Grade Points) / Total Attempted Credits
           </div>
+
+          <h4 className="font-bold text-foreground mt-3">How UIU Calculates Cumulative CGPA</h4>
           <p>
-            Cumulative CGPA is computed by taking the total cumulative grade points accumulated over all semesters,
-            divided by the overall credits completed.
+            Your <strong>cumulative CGPA</strong> considers all semesters completed so far. It is computed by taking
+            the total grade points accumulated over every semester divided by the total credits completed. Use the
+            <strong> Previous CGPA input</strong> on the calculator to combine your existing academic history with
+            your current semester results for an accurate overall CGPA.
+          </p>
+
+          <h4 className="font-bold text-foreground mt-3">UIU Passing Marks &amp; Retake Policy</h4>
+          <p>
+            At UIU, the minimum passing mark is <strong>55% (D grade)</strong>. A grade of <strong>F (below 55%)</strong>
+            is a fail and must be retaken. When you retake a course, the new grade replaces the old one in your
+            CGPA calculation. The first retake of any course receives a <strong>50% discount</strong> on the
+            per-credit tuition fee, making retake registration more affordable. Repeated retakes are charged at the
+            full per-credit rate. The CGPA calculator and tuition fee calculator both account for these rules
+            automatically.
           </p>
 
           <h3 className="text-lg font-bold text-foreground mt-4 flex items-center gap-2">
-            <DollarSign className="h-5 w-5 text-orange-500" /> Tuition Calculation Overview
+            <DollarSign className="h-5 w-5 text-orange-500" /> UIU Tuition Fee Structure
           </h3>
           <p>
-            The tuition fee is computed as: <strong>Total Tuition = (Per-Credit Fee &times; Total Credits) + Registration Fee</strong>.
-            Waivers and discounts (merit-based scholarships, first-retake 50% discount) are subtracted, and optional
-            fees (transportation, gym, late fee) are added to produce the final payable amount.
+            UIU tuition fees are calculated based on the <strong>per-credit fee</strong> multiplied by the number of
+            credits enrolled, plus a fixed <strong>registration fee</strong> each trimester or semester. The total
+            tuition is computed as:
           </p>
+          <div className="bg-surface-secondary p-4 rounded-xl border border-border font-mono text-center text-xs sm:text-sm text-orange-600">
+            Total Tuition = (Per-Credit Fee &times; Total Credits) + Registration Fee
+          </div>
+
+          <h4 className="font-bold text-foreground mt-3">Merit-Based Scholarship &amp; Waiver Criteria</h4>
           <p>
-            Fees are split into three installments: <strong>40% + 30% + 30%</strong>, following UIU&apos;s standard
-            payment schedule.
+            UIU offers admission scholarships based on <strong>SSC and HSC GPA</strong> (Spring 2025 onwards):
+          </p>
+          <p className="font-semibold text-foreground text-xs mt-2">National Curriculum:</p>
+          <ul className="flex flex-col gap-1.5 pl-2 text-sm">
+            <li><strong>50% Waiver</strong> &mdash; SSC GPA 5.00 (with 4th subject) &amp; HSC GPA 5.00 (without 4th subject)</li>
+            <li><strong>25% Waiver</strong> &mdash; SSC GPA 4.50 (with 4th subject) &amp; HSC GPA 5.00 (with 4th subject)</li>
+          </ul>
+          <p className="font-semibold text-foreground text-xs mt-2">English Medium (O/A Level):</p>
+          <ul className="flex flex-col gap-1.5 pl-2 text-sm">
+            <li><strong>50% Waiver</strong> &mdash; 5 A&apos;s in O-Level (in one sitting) &amp; 2 A&apos;s in A-Level</li>
+            <li><strong>25% Waiver</strong> &mdash; 5 A&apos;s in O-Level (in one sitting) &amp; 1 A in A-Level</li>
+          </ul>
+          <p>
+            The waiver applies only to the <strong>credit fee portion</strong> of your tuition, not the registration
+            fee. The <strong>Waiver Assistant</strong> feature automatically checks your eligibility when you enter
+            your SSC and HSC GPAs. Students can also manually set a waiver percentage in the tuition fee calculator.
+          </p>
+
+          <h4 className="font-bold text-foreground mt-3">FYPD Credit Exemption &amp; Fee Discounts</h4>
+          <p>
+            If you are enrolled in the <strong>Final Year Project (FYPD)</strong>, 2 credits are exempted from the
+            tuition waiver calculation. The tuition fee calculator also applies the <strong>first-retake 50%
+            discount</strong> automatically when you enter first-retake credits separately from regular retakes.
+          </p>
+
+          <h4 className="font-bold text-foreground mt-3">Installment Payment Plan</h4>
+          <p>
+            UIU divides tuition fees into <strong>three installments</strong> per trimester or semester:
+            <strong>40% + 30% + 30%</strong>. Optional fees such as <strong>transportation (Tk 4,000 per trimester,
+            Tk 6,000 per semester)</strong>, gym membership, and late registration fees are added to the first
+            installment. The Fee Summary panel displays a complete breakdown of all charges and the installment
+            schedule.
           </p>
         </Card.Content>
       </Card>
