@@ -1,5 +1,11 @@
 # UIU CGPA Calculator
 
+<p align="center">
+  <a href="https://uiu-cgpa-calculator.vercel.app" target="_blank"><strong>Launch Live App →</strong></a>
+  <br />
+  <a href="https://uiu-cgpa-calculator.vercel.app">https://uiu-cgpa-calculator.vercel.app</a>
+</p>
+
 A comprehensive academic planning tool for **United International University (UIU)** students. Calculate semester GPA, cumulative CGPA, tuition fees, and scholarship waivers — all in one place.
 
 Built with [Next.js](https://nextjs.org) (App Router), [HeroUI](https://heroui.com), [Tailwind CSS v4](https://tailwindcss.com), and [Capacitor](https://capacitorjs.com) for cross-platform mobile support.
