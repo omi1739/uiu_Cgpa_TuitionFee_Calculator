@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://uiu-cgpa-calculator.vercel.app"),
   title: "UIU CGPA Calculator | United International University - GPA & Tuition Fee Planner",
   description: "Free UIU CGPA calculator for United International University students. Calculate semester GPA, cumulative CGPA, and tuition fees with scholarship waivers. Official UIU grading scale, semester planner, and fee estimator.",
   keywords: "UIU CGPA calculator, United International University CGPA, UIU GPA calculator, UIU tuition fee calculator, Bangladesh university CGPA, UIU grading scale, UIU scholarship calculator, academic planner, semester GPA calculator",
@@ -23,11 +24,13 @@ export const metadata = {
     type: "website",
     siteName: "UIU CGPA Calculator",
     locale: "en_US",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "UIU CGPA Calculator | United International University",
     description: "Free UIU CGPA and tuition fee calculator for United International University students. Grade planner, scholarship waiver estimator, and more.",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   robots: {
     index: true,
@@ -39,6 +42,7 @@ export const metadata = {
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "black-translucent",
     "mobile-web-app-capable": "yes",
+    "google-site-verification": "qoHHqjDHK0Z8lw0tm6PHpY1lmvFgawnnqaWzufNjoJ4",
   },
 };
 
