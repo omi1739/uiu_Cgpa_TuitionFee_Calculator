@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
+import { Analytics } from "@vercel/analytics/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,13 @@ export const metadata = {
   robots: {
     index: true,
     follow: true,
+  },
+  manifest: "/manifest.json",
+  other: {
+    "theme-color": "#f97316",
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "black-translucent",
+    "mobile-web-app-capable": "yes",
   },
 };
 
@@ -83,6 +91,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="min-h-full flex flex-col transition-colors duration-300">
         <Providers>{children}</Providers>
+        <Analytics />
       </body>
     </html>
   );
