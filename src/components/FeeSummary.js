@@ -1,14 +1,14 @@
 "use client";
 
 import { Card, Separator } from "@heroui/react";
-import { Receipt, CreditCard, BadgePercent, ShieldCheck, PiggyBank, Minus, Equal } from "lucide-react";
+import { Receipt, CreditCard, BadgePercent, ShieldCheck, PiggyBank, Minus, Equal, Calendar } from "lucide-react";
 
 export default function FeeSummary({ feeBreakdown }) {
   const {
     cf: creditFee = 0, rf: registrationFee = 0, waiverPercent = 0,
     regCred: regularCredits = 0, frCred: firstRetakeCredits = 0, retCred: retakeCredits = 0,
     lateAmt, transportAmt, gymAmt, waiverDeduction, retakeDiscount, netTuition,
-    totalTuition: grossTuition, trimesterMode
+    totalTuition: grossTuition, trimesterMode, installments = []
   } = feeBreakdown || {};
 
   const totalCredits = (parseFloat(regularCredits) || 0) + (parseFloat(firstRetakeCredits) || 0) + (parseFloat(retakeCredits) || 0);
@@ -62,6 +62,31 @@ export default function FeeSummary({ feeBreakdown }) {
             Tk {totalFees.toLocaleString()}
           </span>
         </div>
+        {installments.length > 0 && (
+          <>
+            <Separator className="my-2 bg-separator" />
+            <div className="pt-1">
+              <div className="flex items-center gap-2 mb-2">
+                <Calendar className="h-4 w-4 text-muted" />
+                <span className="text-xs font-bold text-muted uppercase tracking-wider">Installment Plan</span>
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <div className="flex items-center justify-between py-1 px-2 rounded-lg bg-background-secondary">
+                  <span className="text-xs text-muted">1st Installment (40%)</span>
+                  <span className="text-xs font-bold text-foreground">Tk {installments[0].toLocaleString()}</span>
+                </div>
+                <div className="flex items-center justify-between py-1 px-2 rounded-lg bg-background-secondary">
+                  <span className="text-xs text-muted">2nd Installment (30%)</span>
+                  <span className="text-xs font-bold text-foreground">Tk {installments[1].toLocaleString()}</span>
+                </div>
+                <div className="flex items-center justify-between py-1 px-2 rounded-lg bg-background-secondary">
+                  <span className="text-xs text-muted">3rd Installment (30%)</span>
+                  <span className="text-xs font-bold text-foreground">Tk {installments[2].toLocaleString()}</span>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </Card.Content>
     </Card>
   );
