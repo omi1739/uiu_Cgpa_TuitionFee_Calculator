@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { Button, Card, Separator } from "@heroui/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Layers, RefreshCw, PlusCircle, Trash2, Calculator } from "lucide-react";
+import { Layers, RefreshCw, Plus, Trash2, Calculator } from "lucide-react";
 import { GRADE_SCALE, CREDIT_OPTIONS } from "./constants";
 
 export default function CourseList({ courses, onUpdateCourse, onAddCourse, onDeleteCourse, onClearAll, onCalculate }) {
@@ -54,6 +54,7 @@ export default function CourseList({ courses, onUpdateCourse, onAddCourse, onDel
                   onChange={(e) => onUpdateCourse(course.id, "credits", e.target.value)}
                   className="px-3 py-2 bg-field border border-border rounded-lg text-sm text-foreground font-medium focus:outline-none focus:border-orange-500 transition-colors cursor-pointer"
                 >
+                  <option value="" disabled>Credits</option>
                   {CREDIT_OPTIONS.map((opt) => (
                     <option key={opt.value} value={opt.value}>{opt.label}</option>
                   ))}
@@ -64,6 +65,7 @@ export default function CourseList({ courses, onUpdateCourse, onAddCourse, onDel
                   onChange={(e) => onUpdateCourse(course.id, "grade", e.target.value)}
                   className="flex-1 px-3 py-2 bg-field border border-border rounded-lg text-sm text-foreground font-semibold focus:outline-none focus:border-orange-500 transition-colors cursor-pointer"
                 >
+                  <option value="" disabled>Grade</option>
                   {GRADE_SCALE.map((s) => (
                     <option key={s.grade} value={s.grade}>{s.grade} ({s.gpa.toFixed(2)})</option>
                   ))}
@@ -84,10 +86,10 @@ export default function CourseList({ courses, onUpdateCourse, onAddCourse, onDel
 
         <Button
           variant="light"
-          className="w-full border-2 border-dashed border-border/60 hover:border-orange-500/40 text-muted hover:text-orange-500 py-5 text-sm rounded-xl transition-all"
-          startContent={<PlusCircle className="h-4 w-4" />}
+          className="w-full border-2 border-dashed border-orange-300/40 dark:border-orange-500/30 hover:border-orange-500/60 text-orange-600 dark:text-orange-400 hover:text-orange-500 py-5 text-sm rounded-xl transition-all"
           onClick={onAddCourse}
         >
+          <Plus className="h-5 w-5 text-green-500 stroke-[3]" />
           Add Course
         </Button>
 

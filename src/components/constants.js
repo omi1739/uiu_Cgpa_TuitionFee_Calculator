@@ -8,8 +8,8 @@ export const GRADE_SCALE = [
   { grade: "C", gpa: 2.00, marks: "66-69", desc: "Average", color: "#fb923c" },
   { grade: "C-", gpa: 1.67, marks: "62-65", desc: "Below Average", color: "#f97316" },
   { grade: "D+", gpa: 1.33, marks: "58-61", desc: "Poor", color: "#ef4444" },
-  { grade: "D", gpa: 1.00, marks: "57", desc: "Very Poor", color: "#dc2626" },
-  { grade: "F", gpa: 0.00, marks: "Less than 57", desc: "Failed", color: "#ef4444" },
+  { grade: "D", gpa: 1.00, marks: "55-57", desc: "Very Poor", color: "#dc2626" },
+  { grade: "F", gpa: 0.00, marks: "Less than 55", desc: "Failed", color: "#ef4444" },
 ];
 
 export const CREDIT_OPTIONS = [

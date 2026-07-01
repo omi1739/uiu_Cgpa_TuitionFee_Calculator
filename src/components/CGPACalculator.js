@@ -10,8 +10,7 @@ import TargetPlanner from "./TargetPlanner";
 
 export default function CGPACalculator() {
   const [courses, setCourses] = useState([
-    { id: 1, name: "", credits: "3.0", grade: "A" },
-    { id: 2, name: "", credits: "3.0", grade: "B+" },
+    { id: 1, name: "", credits: "", grade: "" },
   ]);
 
   const [prevCGPA, setPrevCGPA] = useState("");
@@ -32,7 +31,7 @@ export default function CGPACalculator() {
 
   const addCourse = () => {
     const nextId = courses.length > 0 ? Math.max(...courses.map((c) => c.id)) + 1 : 1;
-    setCourses((prev) => [...prev, { id: nextId, name: "", credits: "3.0", grade: "A" }]);
+    setCourses((prev) => [...prev, { id: nextId, name: "", credits: "", grade: "" }]);
     setIsCalculated(false);
   };
 
@@ -44,7 +43,7 @@ export default function CGPACalculator() {
   };
 
   const clearAll = () => {
-    setCourses([{ id: 1, name: "", credits: "3.0", grade: "A" }]);
+    setCourses([{ id: 1, name: "", credits: "", grade: "" }]);
     setPrevCGPA("");
     setPrevCredits("");
     setSemesterGPA(null);
@@ -128,6 +127,12 @@ export default function CGPACalculator() {
       className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-8"
     >
       <div className="lg:col-span-8 flex flex-col gap-6">
+        <PreviousCGPAInput
+          prevCGPA={prevCGPA}
+          prevCredits={prevCredits}
+          onPrevCGPAChange={(v) => { setPrevCGPA(v); setIsCalculated(false); }}
+          onPrevCreditsChange={(v) => { setPrevCredits(v); setIsCalculated(false); }}
+        />
         <CourseList
           courses={courses}
           onUpdateCourse={updateCourse}
@@ -135,12 +140,6 @@ export default function CGPACalculator() {
           onDeleteCourse={deleteCourse}
           onClearAll={clearAll}
           onCalculate={calculateCGPA}
-        />
-        <PreviousCGPAInput
-          prevCGPA={prevCGPA}
-          prevCredits={prevCredits}
-          onPrevCGPAChange={(v) => { setPrevCGPA(v); setIsCalculated(false); }}
-          onPrevCreditsChange={(v) => { setPrevCredits(v); setIsCalculated(false); }}
         />
       </div>
 

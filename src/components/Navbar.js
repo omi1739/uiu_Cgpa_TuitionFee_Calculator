@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@heroui/react";
-import { GraduationCap, Info, Sun, Moon } from "lucide-react";
+import { Info, Sun, Moon } from "lucide-react";
 
 const TABS = [
   { key: "calculator", label: "CGPA Calculator", short: "GPA", path: "/calculator" },
@@ -20,9 +20,13 @@ export default function Navbar({ theme, onThemeToggle, onScaleOpen }) {
     <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-white/80 dark:bg-zinc-950/70 border-b border-zinc-200 dark:border-zinc-800 px-6 py-3 transition-colors duration-300">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group shrink-0">
-          <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-orange-500 to-amber-400 flex items-center justify-center shadow-lg shadow-orange-500/25 dark:shadow-orange-500/10 group-hover:shadow-orange-500/40 transition-shadow" aria-hidden="true">
-            <GraduationCap className="h-6 w-6 text-black stroke-[2.5]" />
-          </div>
+          <img
+            src="/logo.svg"
+            alt="UIU CGPA Calculator"
+            width="40"
+            height="40"
+            className="rounded-xl shadow-lg shadow-orange-500/25 dark:shadow-orange-500/10 group-hover:shadow-orange-500/40 transition-shadow"
+          />
           <div className="hidden sm:block">
             <span className="font-extrabold text-xl tracking-tight bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 dark:from-orange-400 dark:via-amber-300 dark:to-white bg-clip-text text-transparent">
               UIU

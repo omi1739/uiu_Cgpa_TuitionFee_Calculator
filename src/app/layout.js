@@ -32,6 +32,10 @@ export const metadata = {
     description: "Free UIU CGPA and tuition fee calculator for United International University students. Grade planner, scholarship waiver estimator, and more.",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
+  icons: {
+    icon: "/logo.svg",
+    apple: "/logo.svg",
+  },
   robots: {
     index: true,
     follow: true,
