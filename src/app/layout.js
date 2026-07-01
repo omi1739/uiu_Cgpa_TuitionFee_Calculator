@@ -42,7 +42,7 @@ export const metadata = {
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "black-translucent",
     "mobile-web-app-capable": "yes",
-    "google-site-verification": "qoHHqjDHK0Z8lw0tm6PHpY1lmvFgawnnqaWzufNjoJ4",
+    "google-site-verification": "EGVWJRDtLnYx6KpCn_72hTaxMWLVQkRMK6-M1AkE68o",
   },
 };
 
