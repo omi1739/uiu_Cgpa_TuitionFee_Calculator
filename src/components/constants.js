@@ -1,15 +1,15 @@
 export const GRADE_SCALE = [
-  { grade: "A", gpa: 4.00, marks: "90-100", desc: "Outstanding" },
-  { grade: "A-", gpa: 3.67, marks: "86-89", desc: "Excellent" },
-  { grade: "B+", gpa: 3.33, marks: "82-85", desc: "Very Good" },
-  { grade: "B", gpa: 3.00, marks: "78-81", desc: "Good" },
-  { grade: "B-", gpa: 2.67, marks: "74-77", desc: "Satisfactory" },
-  { grade: "C+", gpa: 2.33, marks: "70-73", desc: "Above Average" },
-  { grade: "C", gpa: 2.00, marks: "66-69", desc: "Average" },
-  { grade: "C-", gpa: 1.67, marks: "62-65", desc: "Below Average" },
-  { grade: "D+", gpa: 1.33, marks: "58-61", desc: "Poor" },
-  { grade: "D", gpa: 1.00, marks: "57", desc: "Very Poor" },
-  { grade: "F", gpa: 0.00, marks: "Less than 57", desc: "Failed" },
+  { grade: "A", gpa: 4.00, marks: "90-100", desc: "Outstanding", color: "#22c55e" },
+  { grade: "A-", gpa: 3.67, marks: "86-89", desc: "Excellent", color: "#4ade80" },
+  { grade: "B+", gpa: 3.33, marks: "82-85", desc: "Very Good", color: "#86efac" },
+  { grade: "B", gpa: 3.00, marks: "78-81", desc: "Good", color: "#3b82f6" },
+  { grade: "B-", gpa: 2.67, marks: "74-77", desc: "Satisfactory", color: "#60a5fa" },
+  { grade: "C+", gpa: 2.33, marks: "70-73", desc: "Above Average", color: "#facc15" },
+  { grade: "C", gpa: 2.00, marks: "66-69", desc: "Average", color: "#fb923c" },
+  { grade: "C-", gpa: 1.67, marks: "62-65", desc: "Below Average", color: "#f97316" },
+  { grade: "D+", gpa: 1.33, marks: "58-61", desc: "Poor", color: "#ef4444" },
+  { grade: "D", gpa: 1.00, marks: "57", desc: "Very Poor", color: "#dc2626" },
+  { grade: "F", gpa: 0.00, marks: "Less than 57", desc: "Failed", color: "#ef4444" },
 ];
 
 export const CREDIT_OPTIONS = [

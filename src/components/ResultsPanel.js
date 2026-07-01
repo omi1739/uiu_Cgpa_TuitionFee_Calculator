@@ -1,97 +1,83 @@
 "use client";
 
-import { Card, Chip, Separator } from "@heroui/react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Calculator } from "lucide-react";
+import { useMemo } from "react";
+import { Card, Separator } from "@heroui/react";
+import { motion } from "framer-motion";
+import { Trophy, Target, TrendingUp } from "lucide-react";
 import { GRADE_SCALE } from "./constants";
 
+const RADIUS = 58;
+const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+
 export default function ResultsPanel({ semesterGPA, cumulativeCGPA, totalCredits, prevCredits, isCalculated }) {
-  const getGPABadgeColor = (gpa) => {
-    if (gpa >= 3.67) return "success";
-    if (gpa >= 3.0) return "primary";
-    if (gpa >= 2.2) return "warning";
-    return "danger";
-  };
+  const displayGPA = isCalculated ? (cumulativeCGPA !== null ? cumulativeCGPA : semesterGPA) : null;
+
+  const gradeInfo = useMemo(() => {
+    if (displayGPA === null) return { letter: "--", color: "var(--color-muted)", name: "N/A" };
+    for (const s of GRADE_SCALE) {
+      if (displayGPA >= s.gpa) return { letter: s.grade, color: s.color, name: s.desc };
+    }
+    return { letter: "F", color: "#ef4444", name: "Failed" };
+  }, [displayGPA]);
+
+  const offset = CIRCUMFERENCE - ((displayGPA ?? 0) / 4.0) * CIRCUMFERENCE;
+
+  const totalGradePoints = isCalculated && semesterGPA !== null ? semesterGPA * totalCredits : null;
+
+  const stats = useMemo(() => [
+    { label: "GPA", value: displayGPA !== null ? displayGPA.toFixed(2) : "—", icon: Trophy, sub: isCalculated ? gradeInfo.name : "Not calculated" },
+    { label: "Grade", value: gradeInfo.letter, icon: Target, sub: isCalculated ? `on ${totalCredits} credits` : "—" },
+    { label: "Total", value: totalGradePoints !== null ? totalGradePoints.toFixed(2) : "—", icon: TrendingUp, sub: isCalculated ? "grade points" : "—" },
+  ], [displayGPA, gradeInfo, totalCredits, totalGradePoints, isCalculated]);
 
   return (
-    <AnimatePresence mode="wait">
-      {isCalculated ? (
-        <motion.div
-          key="results"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ type: "spring", stiffness: 300, damping: 25 }}
-        >
-          <Card className="border border-border bg-surface/60 backdrop-blur-xl relative overflow-hidden shadow-sm">
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-orange-500/10 rounded-full blur-2xl pointer-events-none" />
-
-            <Card.Header className="px-6 pt-6">
-              <div className="flex items-center gap-2">
-                <Sparkles className="h-5 w-5 text-amber-500 animate-pulse" />
-                <h3 className="font-bold text-lg text-foreground">Your Results</h3>
-              </div>
-            </Card.Header>
-            <Separator className="my-2 bg-separator" />
-            <Card.Content className="px-6 py-6 flex flex-col gap-6" aria-live="polite">
-              <div className="flex flex-col items-center justify-center py-4 bg-background-secondary rounded-2xl border border-border/80">
-                <span className="text-muted text-xs font-semibold uppercase tracking-wider">
-                  Semester GPA
-                </span>
-                <span className="text-5xl font-black bg-gradient-to-r from-orange-500 to-amber-500 dark:from-orange-400 dark:to-amber-300 bg-clip-text text-transparent my-1">
-                  {semesterGPA !== null ? semesterGPA.toFixed(2) : "0.00"}
-                </span>
-                <Chip size="sm" color={getGPABadgeColor(semesterGPA)} variant="flat" className="font-bold mt-1 text-xs">
-                  Grade {GRADE_SCALE.find((g) => g.gpa <= (semesterGPA || 0))?.grade || "F"}
-                </Chip>
-              </div>
-
-              {cumulativeCGPA !== null && (
-                <div className="flex justify-between items-center p-4 bg-background-secondary border border-border rounded-xl">
-                  <div>
-                    <span className="text-muted text-xs block font-semibold">Cumulative CGPA</span>
-                    <span className="text-2xl font-black text-orange-500 mt-0.5 block">
-                      {cumulativeCGPA.toFixed(2)}
-                    </span>
-                  </div>
-                  <Chip size="sm" variant="dot" color="success" className="text-foreground border-border">
-                    Updated CGPA
-                  </Chip>
-                </div>
-              )}
-
-              <div className="flex flex-col gap-3 text-sm border-t border-border pt-3">
-                <div className="flex justify-between">
-                  <span className="text-muted">Semester Credits:</span>
-                  <span className="font-bold text-foreground">{totalCredits.toFixed(1)} Credits</span>
-                </div>
-                {prevCredits ? (
-                  <div className="flex justify-between">
-                    <span className="text-muted">Total Completed Credits:</span>
-                    <span className="font-bold text-foreground">
-                      {(parseFloat(prevCredits) + totalCredits).toFixed(1)} Credits
-                    </span>
-                  </div>
-                ) : null}
-              </div>
-            </Card.Content>
-          </Card>
-        </motion.div>
-      ) : (
-        <Card className="border border-border bg-surface/50 backdrop-blur-xl border-dashed shadow-sm">
-          <Card.Content className="p-8 text-center flex flex-col items-center justify-center gap-3">
-            <div className="h-12 w-12 rounded-full bg-surface-secondary flex items-center justify-center text-muted animate-bounce">
-              <Calculator className="h-6 w-6" />
+    <Card className="border border-border bg-surface shadow-sm">
+      <Card.Header className="px-6 pt-6 pb-2">
+        <div className="flex items-center gap-2">
+          <div className="h-9 w-9 rounded-lg bg-orange-500/10 flex items-center justify-center">
+            <Trophy className="h-5 w-5 text-orange-500" />
+          </div>
+          <div>
+            <h2 className="text-base font-bold text-foreground">Results</h2>
+            <p className="text-xs text-muted">Your calculated GPA and grade summary.</p>
+          </div>
+        </div>
+      </Card.Header>
+      <Separator className="my-1 bg-separator" />
+      <Card.Content className="px-5 py-5">
+        <div className="flex flex-col items-center gap-6">
+          <div className="relative flex items-center justify-center">
+            <svg width="140" height="140" className="-rotate-90">
+              <circle cx="70" cy="70" r={RADIUS} fill="none" stroke="var(--color-separator)" strokeWidth="10" />
+              <motion.circle
+                cx="70" cy="70" r={RADIUS}
+                fill="none"
+                stroke={gradeInfo.color}
+                strokeWidth="10"
+                strokeLinecap="round"
+                strokeDasharray={CIRCUMFERENCE}
+                initial={{ strokeDashoffset: CIRCUMFERENCE }}
+                animate={{ strokeDashoffset: offset }}
+                transition={{ duration: 1, ease: "easeOut" }}
+              />
+            </svg>
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <span className="text-3xl font-extrabold text-foreground" style={{ color: gradeInfo.color }}>{displayGPA !== null ? displayGPA.toFixed(2) : "—"}</span>
+              <span className="text-xs font-bold text-muted">{isCalculated ? "out of 4.00" : "Press Calculate"}</span>
             </div>
-            <div>
-              <h4 className="font-semibold text-foreground">Awaiting Calculation</h4>
-              <p className="text-xs text-zinc-500 mt-1 max-w-[200px] mx-auto">
-                Enter your courses and grades, then click Calculate CGPA to see your semester GPA and cumulative CGPA.
-              </p>
-            </div>
-          </Card.Content>
-        </Card>
-      )}
-    </AnimatePresence>
+          </div>
+
+          <div className="grid grid-cols-3 gap-3 w-full">
+            {stats.map((stat) => (
+              <div key={stat.label} className="flex flex-col items-center gap-1 p-3 rounded-xl bg-background-secondary border border-border/60">
+                <stat.icon className="h-5 w-5 text-orange-500" />
+                <span className="text-lg font-extrabold text-foreground">{stat.value}</span>
+                <span className="text-xs text-muted">{stat.sub}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Card.Content>
+    </Card>
   );
 }

@@ -1,3 +1,5 @@
+"use client";
+
 export default function Footer({ onScaleOpen }) {
   return (
     <footer className="w-full mt-20 border-t border-zinc-200 dark:border-zinc-900 py-8 px-6 text-center text-xs text-zinc-500">

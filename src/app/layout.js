@@ -1,7 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Providers } from "./providers";
 import { Analytics } from "@vercel/analytics/react";
+import ClientShell from "./client-shell";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -94,7 +94,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="min-h-full flex flex-col transition-colors duration-300">
-        <Providers>{children}</Providers>
+        <ClientShell>{children}</ClientShell>
         <Analytics />
       </body>
     </html>

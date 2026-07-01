@@ -1,127 +1,104 @@
 "use client";
 
+import { useMemo } from "react";
 import { Button, Card, Separator } from "@heroui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Layers, RefreshCw, PlusCircle, Trash2, Calculator } from "lucide-react";
 import { GRADE_SCALE, CREDIT_OPTIONS } from "./constants";
 
 export default function CourseList({ courses, onUpdateCourse, onAddCourse, onDeleteCourse, onClearAll, onCalculate }) {
+  const totalCredits = useMemo(
+    () => courses.reduce((sum, c) => sum + (parseFloat(c.credits) || 0), 0),
+    [courses]
+  );
+
   return (
-    <Card className="border border-border bg-surface/70 backdrop-blur-xl shadow-sm">
+    <Card className="border border-border bg-surface shadow-sm">
       <Card.Header className="flex justify-between items-center px-6 pt-6 pb-2">
         <div className="flex items-center gap-2">
-          <Layers className="h-5 w-5 text-orange-500" />
-          <h2 className="text-lg font-bold text-foreground">Current Semester Courses</h2>
+          <div className="h-9 w-9 rounded-lg bg-orange-500/10 flex items-center justify-center">
+            <Layers className="h-5 w-5 text-orange-500" />
+          </div>
+          <div>
+            <h2 className="text-base font-bold text-foreground">Courses</h2>
+            <p className="text-xs text-muted">{courses.length} course{courses.length !== 1 ? "s" : ""} &middot; {totalCredits.toFixed(1)} total credits</p>
+          </div>
         </div>
         <Button
           size="sm"
           variant="flat"
-          className="bg-surface-secondary border border-border/50 text-muted hover:text-foreground"
-          startContent={<RefreshCw className="h-3.5 w-3.5" />}
+          className="bg-transparent border border-border/50 text-muted hover:text-foreground h-8 min-w-0 px-3"
+          startContent={<RefreshCw className="h-3 w-3" />}
           onClick={onClearAll}
         >
-          Reset All
+          Reset
         </Button>
       </Card.Header>
-      <Separator className="my-2 bg-separator" />
-      <Card.Content className="px-6 py-4 flex flex-col gap-4">
-        <div className="flex flex-col gap-3">
-          <AnimatePresence initial={false}>
-            {courses.map((course) => (
-              <motion.div
-                key={course.id}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.15 }}
-                className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center p-3 rounded-xl bg-background-secondary border border-border/50 hover:border-orange-500/20 transition-all shadow-sm"
+      <Separator className="my-1 bg-separator" />
+      <Card.Content className="px-5 py-4 flex flex-col gap-3">
+        <AnimatePresence initial={false}>
+          {courses.map((course) => (
+            <motion.div
+              key={course.id}
+              initial={{ opacity: 0, y: 12, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95, height: 0, marginBottom: 0 }}
+              transition={{ duration: 0.15 }}
+              className="flex items-center gap-3 p-3 rounded-xl bg-background-secondary border border-border/60 hover:border-orange-500/25 transition-all"
+            >
+              <span className="text-xs font-semibold text-muted min-w-[20px]">#{course.id}</span>
+              <div className="flex items-center gap-2 flex-1">
+                <select
+                  autoComplete="off"
+                  value={course.credits}
+                  onChange={(e) => onUpdateCourse(course.id, "credits", e.target.value)}
+                  className="px-3 py-2 bg-field border border-border rounded-lg text-sm text-foreground font-medium focus:outline-none focus:border-orange-500 transition-colors cursor-pointer"
+                >
+                  {CREDIT_OPTIONS.map((opt) => (
+                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+                  ))}
+                </select>
+                <select
+                  autoComplete="off"
+                  value={course.grade}
+                  onChange={(e) => onUpdateCourse(course.id, "grade", e.target.value)}
+                  className="flex-1 px-3 py-2 bg-field border border-border rounded-lg text-sm text-foreground font-semibold focus:outline-none focus:border-orange-500 transition-colors cursor-pointer"
+                >
+                  {GRADE_SCALE.map((s) => (
+                    <option key={s.grade} value={s.grade}>{s.grade} ({s.gpa.toFixed(2)})</option>
+                  ))}
+                </select>
+              </div>
+              <button
+                type="button"
+                disabled={courses.length <= 1}
+                onClick={() => onDeleteCourse(course.id)}
+                className="p-2 text-muted/60 hover:text-red-500 hover:bg-red-500/10 rounded-lg disabled:opacity-20 transition-all"
+                aria-label="Remove course"
               >
-                <div className="sm:col-span-4 flex flex-col gap-1">
-                  <label htmlFor={`course-name-${course.id}`} className="text-[11px] text-muted font-semibold tracking-wider uppercase ml-1">
-                    Course Title
-                  </label>
-                  <input autoComplete="off"
-                    id={`course-name-${course.id}`}
-                    type="text"
-                    value={course.name}
-                    onChange={(e) => onUpdateCourse(course.id, "name", e.target.value)}
-                    className="w-full px-3 py-2 bg-field border border-border hover:border-zinc-300 focus:border-orange-500 rounded-lg text-sm text-foreground focus:outline-none transition-all"
-                    placeholder="e.g. SPL"
-                  />
-                </div>
+                <Trash2 className="h-4 w-4" />
+              </button>
+            </motion.div>
+          ))}
+        </AnimatePresence>
 
-                <div className="sm:col-span-4 flex flex-col gap-1">
-                  <label htmlFor={`course-credits-${course.id}`} className="text-[11px] text-muted font-semibold tracking-wider uppercase ml-1">
-                    Credits
-                  </label>
-                  <select autoComplete="off"
-                    id={`course-credits-${course.id}`}
-                    value={course.credits}
-                    onChange={(e) => onUpdateCourse(course.id, "credits", e.target.value)}
-                    className="w-full px-3 py-2 bg-field border border-border hover:border-zinc-300 focus:border-orange-500 rounded-lg text-sm text-foreground focus:outline-none transition-all cursor-pointer"
-                  >
-                    {CREDIT_OPTIONS.map((opt) => (
-                      <option key={opt.value} value={opt.value} className="bg-field text-foreground">
-                        {opt.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="sm:col-span-3 flex flex-col gap-1">
-                  <label htmlFor={`course-grade-${course.id}`} className="text-[11px] text-muted font-semibold tracking-wider uppercase ml-1">
-                    Grade
-                  </label>
-                  <select autoComplete="off"
-                    id={`course-grade-${course.id}`}
-                    value={course.grade}
-                    onChange={(e) => onUpdateCourse(course.id, "grade", e.target.value)}
-                    className="w-full px-3 py-2 bg-field border border-border hover:border-zinc-300 focus:border-orange-500 rounded-lg text-sm text-foreground focus:outline-none transition-all cursor-pointer"
-                  >
-                    {GRADE_SCALE.map((scale) => (
-                      <option key={scale.grade} value={scale.grade} className="bg-field text-foreground">
-                        {scale.grade} ({scale.gpa.toFixed(2)})
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="sm:col-span-1 flex justify-center pt-5 sm:pt-0">
-                  <button
-                    type="button"
-                    disabled={courses.length <= 1}
-                    onClick={() => onDeleteCourse(course.id)}
-                    className="p-2 text-muted hover:text-red-500 hover:bg-surface-secondary rounded-lg disabled:opacity-30 transition-colors"
-                    aria-label={`Remove ${course.name}`}
-                  >
-                    <Trash2 className="h-5 w-5" />
-                  </button>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </div>
-
-        <div className="mt-2 flex flex-col sm:flex-row gap-3">
-          <Button
-            variant="dashed"
-            className="flex-1 border-2 border-dashed border-border hover:border-orange-500/50 hover:bg-orange-500/5 text-muted hover:text-orange-500 py-6 transition-all"
-            startContent={<PlusCircle className="h-5 w-5" />}
-            onClick={onAddCourse}
-          >
-            Add Another Course
-          </Button>
-        </div>
+        <Button
+          variant="light"
+          className="w-full border-2 border-dashed border-border/60 hover:border-orange-500/40 text-muted hover:text-orange-500 py-5 text-sm rounded-xl transition-all"
+          startContent={<PlusCircle className="h-4 w-4" />}
+          onClick={onAddCourse}
+        >
+          Add Course
+        </Button>
 
         <Button
           size="lg"
-          className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-black font-extrabold text-base shadow-lg shadow-orange-500/15 py-6 hover:scale-[1.01] active:scale-[0.99] transition-transform border border-orange-400/25"
-          startContent={<Calculator className="h-5 w-5 text-black stroke-[2.5]" />}
+          className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-black font-extrabold text-sm shadow-lg shadow-orange-500/20 py-5 hover:scale-[1.01] active:scale-[0.99] transition-transform rounded-xl border border-orange-400/25"
+          startContent={<Calculator className="h-4 w-4 text-black stroke-[2.5]" />}
           onClick={onCalculate}
         >
           Calculate CGPA
         </Button>
-
       </Card.Content>
     </Card>
   );

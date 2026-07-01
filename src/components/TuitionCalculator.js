@@ -42,8 +42,8 @@ export default function TuitionCalculator() {
   const frCred = parseFloat(firstRetakeCredits) || 0;
   const retCred = parseFloat(retakeCredits) || 0;
 
-  const totalTuition = cf * (regCred + frCred + retCred) + rf;
-  const waiverDeduction = (regCred - (fydp ? 2 : 0)) * cf * (waiverPercent / 100);
+  const totalTuition = cf * (regCred + frCred + retCred);
+  const waiverDeduction = Math.max(0, regCred - (fydp ? 2 : 0)) * cf * (waiverPercent / 100);
   const retakeDiscount = frCred * cf * 0.5;
   const totalWaiver = waiverDeduction + retakeDiscount;
   const netTuition = Math.max(0, totalTuition - totalWaiver);
@@ -111,7 +111,9 @@ export default function TuitionCalculator() {
       </div>
 
       <div className="lg:col-span-4 flex flex-col gap-6">
-        <FeeSummary feeBreakdown={feeBreakdown} />
+        <div className="lg:sticky lg:top-24">
+          <FeeSummary feeBreakdown={feeBreakdown} />
+        </div>
       </div>
     </motion.main>
   );

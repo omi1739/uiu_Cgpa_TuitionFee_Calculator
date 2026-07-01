@@ -1,131 +1,68 @@
 "use client";
 
-import { Card, Chip, Separator } from "@heroui/react";
-import { Coins } from "lucide-react";
+import { Card, Separator } from "@heroui/react";
+import { Receipt, CreditCard, BadgePercent, ShieldCheck, PiggyBank, Minus, Equal } from "lucide-react";
 
 export default function FeeSummary({ feeBreakdown }) {
   const {
-    feeTotal, installments, totalTuition, registrationFee: rf,
-    waiverDeduction, retakeDiscount, netTuition,
-    lateAmt, transportAmt, gymAmt,
-    waiverPercent, trimesterMode, regCred, frCred, retCred, fydp, cf
-  } = feeBreakdown;
+    cf: creditFee = 0, rf: registrationFee = 0, waiverPercent = 0,
+    regCred: regularCredits = 0, frCred: firstRetakeCredits = 0, retCred: retakeCredits = 0,
+    lateAmt, transportAmt, gymAmt, waiverDeduction, retakeDiscount, netTuition,
+    totalTuition: grossTuition, trimesterMode
+  } = feeBreakdown || {};
 
-  const hasData = regCred > 0 || frCred > 0 || retCred > 0;
+  const totalCredits = (parseFloat(regularCredits) || 0) + (parseFloat(firstRetakeCredits) || 0) + (parseFloat(retakeCredits) || 0);
+
+  const items = [
+    { label: "Tuition (Gross)", amount: grossTuition || 0, icon: CreditCard, color: "text-foreground" },
+    { label: "Waiver", amount: -(waiverDeduction || 0) - (retakeDiscount || 0), icon: BadgePercent, color: "text-green-600 dark:text-green-400" },
+    { label: "Registration Fee", amount: registrationFee || 0, icon: ShieldCheck, color: "text-foreground" },
+    { label: "Transportation", amount: transportAmt || 0, icon: PiggyBank, color: "text-blue-600 dark:text-blue-400" },
+    { label: "Gym", amount: gymAmt || 0, icon: PiggyBank, color: "text-green-600 dark:text-green-400" },
+    { label: "Late Fee", amount: lateAmt || 0, icon: Minus, color: "text-red-600 dark:text-red-400" },
+  ].filter((i) => i.amount !== 0);
+
+  const totalFees = (netTuition || 0) + (registrationFee || 0) + (transportAmt || 0) + (gymAmt || 0) + (lateAmt || 0);
 
   return (
-    <Card className="border border-border bg-surface/70 backdrop-blur-xl relative overflow-hidden shadow-sm">
-      <div className="absolute -top-10 -right-10 w-32 h-32 bg-orange-500/10 rounded-full blur-2xl pointer-events-none" />
-      <Card.Header className="px-6 pt-6">
+    <Card className="border border-border bg-surface shadow-sm lg:sticky lg:top-24">
+      <Card.Header className="px-6 pt-6 pb-2">
         <div className="flex items-center gap-2">
-          <Coins className="h-5 w-5 text-orange-500" />
-          <h3 className="font-bold text-lg text-foreground">Fee Summary</h3>
+          <div className="h-9 w-9 rounded-lg bg-orange-500/10 flex items-center justify-center">
+            <Receipt className="h-5 w-5 text-orange-500" />
+          </div>
+          <div>
+            <h2 className="text-base font-bold text-foreground">Fee Summary</h2>
+            <p className="text-xs text-muted">{totalCredits.toFixed(1)} credits</p>
+          </div>
         </div>
       </Card.Header>
-      <Separator className="my-2 bg-separator" />
-      <Card.Content className="px-6 py-6 flex flex-col gap-6" aria-live="polite">
-        {hasData ? (
-          <>
-            <div className="flex flex-col items-center justify-center py-5 bg-background-secondary border border-border rounded-2xl">
-              <span className="text-muted text-xs font-semibold uppercase tracking-wider">
-                {trimesterMode ? "Trimester" : "Semester"} Total
+      <Separator className="my-1 bg-separator" />
+      <Card.Content className="px-5 py-4">
+        <div className="flex flex-col gap-2">
+          {items.map((item) => (
+            <div key={item.label} className="flex items-center justify-between py-1.5">
+              <div className="flex items-center gap-2">
+                <item.icon className="h-4 w-4 text-muted shrink-0" />
+                <span className="text-sm text-foreground">{item.label}</span>
+              </div>
+              <span className={`text-sm font-bold ${item.color}`}>
+                {item.amount < 0 ? "-" : "+"}Tk {Math.abs(item.amount).toLocaleString()}
               </span>
-              <span className="text-3xl sm:text-4xl font-black text-orange-600 dark:text-orange-400 my-1 font-mono">
-                Tk {Math.round(feeTotal).toLocaleString()}
-              </span>
-              <Chip size="sm" variant="flat" color="warning" className="font-extrabold mt-1 text-[10px]">
-                {regCred + frCred + retCred} Credits &bull; {waiverPercent}% Waiver
-              </Chip>
             </div>
-
-            <div className="flex flex-col gap-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-muted">Installment Schedule</span>
-              <div className="flex flex-col gap-2">
-                {[
-                  { label: "1st Installment", pct: "40%", amt: installments[0] },
-                  { label: "2nd Installment", pct: "30%", amt: installments[1] },
-                  { label: "3rd Installment", pct: "30%", amt: installments[2] },
-                ].map((inst, idx) => (
-                  <div
-                    key={idx}
-                    className="flex justify-between items-center p-3 rounded-xl bg-background-secondary border border-border/60"
-                  >
-                    <div className="flex items-center gap-2">
-                      <div className="h-6 w-6 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-600 dark:text-orange-400 flex items-center justify-center font-bold text-[10px]">
-                        {idx + 1}
-                      </div>
-                      <div>
-                        <span className="text-sm font-semibold text-foreground">{inst.label}</span>
-                        <span className="text-[10px] text-muted block">({inst.pct})</span>
-                      </div>
-                    </div>
-                    <span className="font-bold font-mono text-sm text-foreground">
-                      Tk {Math.round(inst.amt).toLocaleString()}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-2.5 border-t border-separator pt-4">
-              <span className="text-xs font-bold uppercase tracking-wider text-muted">Detailed Breakdown</span>
-
-              <BreakdownRow label={`Tuition (${(regCred + frCred + retCred).toFixed(1)} &times; Tk ${cf})`} value={totalTuition} />
-              <BreakdownRow label="Registration Fee" value={rf} />
-
-              {waiverPercent > 0 && (
-                <BreakdownRow label={`Waiver Discount (${waiverPercent}% on ${Math.max(0, regCred - (fydp ? 2 : 0))} credits)`} value={-waiverDeduction} color="green" />
-              )}
-              {retakeDiscount > 0 && (
-                <BreakdownRow label={`1st Retake Discount (50% of ${frCred} credits)`} value={-retakeDiscount} color="green" />
-              )}
-
-              <div className="flex justify-between border-t border-separator pt-2 text-xs sm:text-sm">
-                <span className="font-semibold text-foreground">Net Tuition</span>
-                <span className="font-bold font-mono text-foreground">Tk {Math.round(netTuition).toLocaleString()}</span>
-              </div>
-
-              {lateAmt > 0 && <BreakdownRow label="Late Fee" value={lateAmt} />}
-              {transportAmt > 0 && <BreakdownRow label="Transportation" value={transportAmt} />}
-              {gymAmt > 0 && <BreakdownRow label="Gym" value={gymAmt} />}
-
-              <div className="flex justify-between border-t border-orange-500/30 pt-2 text-sm">
-                <span className="font-bold text-foreground">Total Payable</span>
-                <span className="font-black font-mono text-orange-600 dark:text-orange-400">Tk {Math.round(feeTotal).toLocaleString()}</span>
-              </div>
-            </div>
-          </>
-        ) : (
-          <div className="py-10 text-center flex flex-col items-center gap-3">
-            <div className="h-12 w-12 rounded-full bg-surface-secondary flex items-center justify-center text-muted">
-              <Coins className="h-6 w-6" />
-            </div>
-            <div>
-              <p className="font-semibold text-foreground text-sm">No Data Yet</p>
-              <p className="text-xs text-muted mt-1 max-w-[220px] mx-auto">
-                Enter your credit fee, registration fee, and enrolled credits above to see the fee breakdown and installment schedule.
-              </p>
-            </div>
+          ))}
+        </div>
+        <Separator className="my-3 bg-separator" />
+        <div className="flex items-center justify-between py-1">
+          <div className="flex items-center gap-2">
+            <Equal className="h-5 w-5 text-orange-500" />
+            <span className="text-sm font-extrabold text-foreground">Total Due</span>
           </div>
-        )}
+          <span className="text-xl font-extrabold text-orange-600 dark:text-orange-400">
+            Tk {totalFees.toLocaleString()}
+          </span>
+        </div>
       </Card.Content>
     </Card>
-  );
-}
-
-function BreakdownRow({ label, value, color }) {
-  const isNegative = value < 0;
-  const displayValue = Math.abs(Math.round(value));
-  const textColor = color === "green"
-    ? "text-green-600 dark:text-green-400"
-    : "text-muted";
-
-  return (
-    <div className={`flex justify-between text-xs sm:text-sm ${textColor}`}>
-      <span>{label}</span>
-      <span className="font-semibold font-mono">
-        {isNegative ? "- " : ""}Tk {displayValue.toLocaleString()}
-      </span>
-    </div>
   );
 }

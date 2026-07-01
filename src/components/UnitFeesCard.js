@@ -15,84 +15,79 @@ export default function UnitFeesCard({ creditFee, registrationFee, waiverPercent
   const [isCustomWaiver, setIsCustomWaiver] = useState(!presetWaiver.includes(String(waiverPercent)));
 
   return (
-    <Card className="border border-border bg-surface/70 backdrop-blur-xl shadow-sm">
+    <Card className="border border-border bg-surface shadow-sm">
       <Card.Header className="px-6 pt-6 pb-2">
         <div className="flex items-center gap-2">
-          <Coins className="h-5 w-5 text-orange-500" />
+          <div className="h-9 w-9 rounded-lg bg-orange-500/10 flex items-center justify-center">
+            <Coins className="h-5 w-5 text-orange-500" />
+          </div>
           <div>
-            <h2 className="text-lg font-bold text-foreground">Unit Fees</h2>
-            <p className="text-xs text-muted mt-0.5">Set per-credit fee, registration fee, and tuition waiver percentage.</p>
+            <h2 className="text-base font-bold text-foreground">Fee Settings</h2>
+            <p className="text-xs text-muted">Per-credit fee, registration fee, and waiver percentage.</p>
           </div>
         </div>
       </Card.Header>
-      <Separator className="my-2 bg-separator" />
-      <Card.Content className="px-6 py-4">
+      <Separator className="my-1 bg-separator" />
+      <Card.Content className="px-5 py-4">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <DropdownField
-            id="credit-fee"
-            label="Credit Fee (Tk)"
-            value={creditFee}
-            presets={presetCredit}
-            isCustom={isCustomCredit}
-            onPresetSelect={(val) => { setIsCustomCredit(false); onCreditFeeChange(val); }}
-            onCustomSelect={() => { setIsCustomCredit(true); onCreditFeeChange(""); }}
-            onCustomChange={onCreditFeeChange}
-            formatOption={(v) => `Tk ${Number(v).toLocaleString()}`}
-          />
-          <DropdownField
-            id="registration-fee"
-            label="Registration Fee (Tk)"
-            value={registrationFee}
-            presets={presetReg}
-            isCustom={isCustomReg}
-            onPresetSelect={(val) => { setIsCustomReg(false); onRegistrationFeeChange(val); }}
-            onCustomSelect={() => { setIsCustomReg(true); onRegistrationFeeChange(""); }}
-            onCustomChange={onRegistrationFeeChange}
-            formatOption={(v) => `Tk ${Number(v).toLocaleString()}`}
-          />
-          <DropdownField
-            id="tuition-waiver"
-            label="Tuition Waiver %"
-            value={String(waiverPercent)}
-            presets={presetWaiver}
-            isCustom={isCustomWaiver}
-            onPresetSelect={(val) => { setIsCustomWaiver(false); onWaiverPercentChange(val); }}
-            onCustomSelect={() => { setIsCustomWaiver(true); onWaiverPercentChange(""); }}
-            onCustomChange={onWaiverPercentChange}
-            formatOption={(v) => `${v}%`}
-          />
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs text-muted font-semibold uppercase tracking-wider">Credit Fee (Tk)</label>
+            <FeeDropdown
+              presets={presetCredit}
+              value={creditFee}
+              isCustom={isCustomCredit}
+              onPresetSelect={(v) => { setIsCustomCredit(false); onCreditFeeChange(v); }}
+              onCustomSelect={() => { setIsCustomCredit(true); onCreditFeeChange(""); }}
+              onCustomChange={onCreditFeeChange}
+              formatOption={(v) => `Tk ${Number(v).toLocaleString()}`}
+            />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs text-muted font-semibold uppercase tracking-wider">Registration Fee (Tk)</label>
+            <FeeDropdown
+              presets={presetReg}
+              value={registrationFee}
+              isCustom={isCustomReg}
+              onPresetSelect={(v) => { setIsCustomReg(false); onRegistrationFeeChange(v); }}
+              onCustomSelect={() => { setIsCustomReg(true); onRegistrationFeeChange(""); }}
+              onCustomChange={onRegistrationFeeChange}
+              formatOption={(v) => `Tk ${Number(v).toLocaleString()}`}
+            />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs text-muted font-semibold uppercase tracking-wider">Tuition Waiver</label>
+            <FeeDropdown
+              presets={presetWaiver}
+              value={String(waiverPercent)}
+              isCustom={isCustomWaiver}
+              onPresetSelect={(v) => { setIsCustomWaiver(false); onWaiverPercentChange(v); }}
+              onCustomSelect={() => { setIsCustomWaiver(true); onWaiverPercentChange(""); }}
+              onCustomChange={onWaiverPercentChange}
+              formatOption={(v) => `${v}%`}
+            />
+          </div>
         </div>
       </Card.Content>
     </Card>
   );
 }
 
-function DropdownField({ id, label, value, presets, isCustom, onPresetSelect, onCustomSelect, onCustomChange, formatOption }) {
+function FeeDropdown({ presets, value, isCustom, onPresetSelect, onCustomSelect, onCustomChange, formatOption }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={id} className="text-xs text-muted font-bold uppercase tracking-wider">{label}</label>
-      {isCustom ? (
-        <div className="flex gap-2">
-          <input autoComplete="off"
-            id={id}
-            type="number"
-            min="0"
-            placeholder="Enter amount"
-            value={value}
-            onChange={(e) => onCustomChange(e.target.value)}
-            className="flex-1 px-3 py-2 bg-field border border-border hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-orange-500 rounded-lg text-sm text-foreground focus:outline-none transition-all"
-          />
-          <button
-            type="button"
-            onClick={() => onPresetSelect(presets[0])}
-            className="px-3 py-2 text-xs font-bold whitespace-nowrap rounded-lg bg-surface-secondary text-muted hover:text-foreground hover:bg-background-secondary border border-border"
-          >
-            Presets
-          </button>
-        </div>
-      ) : null}
-      <select autoComplete="off"
-        id={isCustom ? undefined : id}
+      {isCustom && (
+        <input
+          autoComplete="off"
+          type="number"
+          min="0"
+          placeholder="Enter amount"
+          value={value}
+          onChange={(e) => onCustomChange(e.target.value)}
+          className="w-full px-3 py-2 bg-field border border-border rounded-lg text-sm text-foreground focus:outline-none focus:border-orange-500 transition-colors"
+        />
+      )}
+      <select
+        autoComplete="off"
         value={isCustom ? "custom" : value}
         onChange={(e) => {
           if (e.target.value === "custom") {
@@ -101,12 +96,10 @@ function DropdownField({ id, label, value, presets, isCustom, onPresetSelect, on
             onPresetSelect(e.target.value);
           }
         }}
-        className={`w-full px-3 py-2 bg-field border border-border hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-orange-500 rounded-lg text-sm text-foreground focus:outline-none transition-all cursor-pointer ${isCustom ? "mt-2" : ""}`}
+        className="w-full px-3 py-2 bg-field border border-border rounded-lg text-sm text-foreground font-medium focus:outline-none focus:border-orange-500 transition-colors cursor-pointer"
       >
         {presets.map((p) => (
-          <option key={p} value={p}>
-            {formatOption(p)}
-          </option>
+          <option key={p} value={p}>{formatOption(p)}</option>
         ))}
         <option value="custom">Custom...</option>
       </select>
