@@ -1,3 +1,22 @@
+# SEO robots configuration for UIU CGPA Calculator
 User-agent: *
 Allow: /
-Sitemap: https://uiu-cgpa-calculator.vercel.app/sitemap.xml
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.env*
+
+# Allow specific search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Sitemap location
+Sitemap: https://uiu-cgpa-tuition-fee-calculator.vercel.app/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1
