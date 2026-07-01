@@ -6,14 +6,12 @@ import { TrendingUp } from "lucide-react";
 export default function PreviousCGPAInput({ prevCGPA, prevCredits, onPrevCGPAChange, onPrevCreditsChange }) {
   return (
     <Card className="border border-border bg-surface/70 backdrop-blur-xl shadow-sm">
-      <Card.Header className="px-6 pt-6 pb-2">
+      <Card.Header className="px-4 pt-1">
         <div className="flex items-center gap-2">
           <TrendingUp className="h-5 w-5 text-orange-500" />
           <div>
             <h3 className="text-base font-bold text-foreground">Include Previous CGPA (Optional)</h3>
-            <p className="text-xs text-muted">
-              Combine your current semester results with your cumulative academic history to calculate your overall CGPA.
-            </p>
+            
           </div>
         </div>
       </Card.Header>

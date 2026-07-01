@@ -14,28 +14,17 @@ export default function CourseList({ courses, onUpdateCourse, onAddCourse, onDel
 
   return (
     <Card className="border border-border bg-surface shadow-sm">
-      <Card.Header className="flex justify-between items-center px-6 pt-6 pb-2">
-        <div className="flex items-center gap-2">
-          <div className="h-9 w-9 rounded-lg bg-orange-500/10 flex items-center justify-center">
-            <Layers className="h-5 w-5 text-orange-500" />
-          </div>
-          <div>
-            <h2 className="text-base font-bold text-foreground">Courses</h2>
-            <p className="text-xs text-muted">{courses.length} course{courses.length !== 1 ? "s" : ""} &middot; {totalCredits.toFixed(1)} total credits</p>
-          </div>
+      <Card.Header className="flex items-center gap-2 px-6 pt-2 ">
+        <div className="h-9 w-9 rounded-lg bg-orange-500/10 flex items-center justify-center">
+          <Layers className="h-5 w-5 text-orange-500" />
         </div>
-        <Button
-          size="sm"
-          variant="flat"
-          className="bg-transparent border border-border/50 text-muted hover:text-foreground h-8 min-w-0 px-3"
-          startContent={<RefreshCw className="h-3 w-3" />}
-          onClick={onClearAll}
-        >
-          Reset
-        </Button>
+        <div>
+          <h2 className="text-base font-bold text-foreground">Courses</h2>
+          <p className="text-xs text-muted">{courses.length} course{courses.length !== 1 ? "s" : ""} &middot; {totalCredits.toFixed(1)} total credits</p>
+        </div>
       </Card.Header>
-      <Separator className="my-1 bg-separator" />
-      <Card.Content className="px-5 py-4 flex flex-col gap-3">
+      <Separator className="my-0.5 bg-separator" />
+      <Card.Content className="px-5 pt-3 pb-4 flex flex-col gap-3">
         <AnimatePresence initial={false}>
           {courses.map((course) => (
             <motion.div
@@ -101,6 +90,15 @@ export default function CourseList({ courses, onUpdateCourse, onAddCourse, onDel
         >
           Calculate CGPA
         </Button>
+
+        <button
+          type="button"
+          onClick={onClearAll}
+          className="self-center text-xs text-muted hover:text-red-500 transition-colors flex items-center gap-1"
+        >
+          <RefreshCw className="h-3 w-3" />
+          Reset all fields
+        </button>
       </Card.Content>
     </Card>
   );
