@@ -42,7 +42,7 @@ export default function TuitionCalculator() {
   const frCred = parseFloat(firstRetakeCredits) || 0;
   const retCred = parseFloat(retakeCredits) || 0;
 
-  const totalTuition = cf * (regCred + frCred + retCred);
+  const totalTuition = cf * (regCred + frCred + retCred) + rf;
   const waiverDeduction = Math.max(0, regCred - (fydp ? 2 : 0)) * cf * (waiverPercent / 100);
   const retakeDiscount = frCred * cf * 0.5;
   const totalWaiver = waiverDeduction + retakeDiscount;

@@ -14,15 +14,15 @@ export default function FeeSummary({ feeBreakdown }) {
   const totalCredits = (parseFloat(regularCredits) || 0) + (parseFloat(firstRetakeCredits) || 0) + (parseFloat(retakeCredits) || 0);
 
   const items = [
-    { label: "Tuition (Gross)", amount: grossTuition || 0, icon: CreditCard, color: "text-foreground" },
-    { label: "Waiver", amount: -(waiverDeduction || 0) - (retakeDiscount || 0), icon: BadgePercent, color: "text-green-600 dark:text-green-400" },
+    { label: "Credit Fees", amount: (grossTuition || 0) - (registrationFee || 0), icon: CreditCard, color: "text-foreground" },
     { label: "Registration Fee", amount: registrationFee || 0, icon: ShieldCheck, color: "text-foreground" },
+    { label: "Waiver", amount: -(waiverDeduction || 0) - (retakeDiscount || 0), icon: BadgePercent, color: "text-green-600 dark:text-green-400" },
     { label: "Transportation", amount: transportAmt || 0, icon: PiggyBank, color: "text-blue-600 dark:text-blue-400" },
     { label: "Gym", amount: gymAmt || 0, icon: PiggyBank, color: "text-green-600 dark:text-green-400" },
     { label: "Late Fee", amount: lateAmt || 0, icon: Minus, color: "text-red-600 dark:text-red-400" },
   ].filter((i) => i.amount !== 0);
 
-  const totalFees = (netTuition || 0) + (registrationFee || 0) + (transportAmt || 0) + (gymAmt || 0) + (lateAmt || 0);
+  const totalFees = (netTuition || 0) + (transportAmt || 0) + (gymAmt || 0) + (lateAmt || 0);
 
   return (
     <Card className="border border-border bg-surface shadow-sm lg:sticky lg:top-24">
